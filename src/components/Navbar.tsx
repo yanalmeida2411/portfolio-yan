@@ -45,7 +45,6 @@ export const Navbar = () => {
                             width={50}
                             height={50}
                             className='rounded-full shadow-sm shadow-[#00BFFF]' 
-                            loading="lazy"
                         />
                         <span className='text-xl lg:text-2xl font-poppins font-semibold select-none
                              text-[#00BFFF] '>
