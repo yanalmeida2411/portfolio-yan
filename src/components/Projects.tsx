@@ -8,19 +8,19 @@ export default function Projects() {
       title: "Sistema de Estoque",
       description: "Aplicação web completa com controle de entrada e saída de produtos, login e dashboard interativo.",
       image: "/estoque.png",
-      link: "https://seuprojeto.com/estoque",
+      link: "https://mystockpro.netlify.app/",
     },
     {
       title: "Landing Page para Agência",
       description: "Página otimizada para captação de leads, com design moderno e foco em conversão.",
       image: "/auralink.png",
-      link: "https://seuprojeto.com/landing",
+      link: "https://auralinkforweb.netlify.app/",
     },
     {
       title: "Gestão de Pessoal",
       description: "Sistema de gestão de RH com painel administrativo, controle de colaboradores, folha de pagamento e relatórios automatizados.",
       image: "/rh.png",
-      link: "https://seuprojeto.com/barbearia",
+      link: "https://myrhpro.netlify.app",
     },
   ];
 
