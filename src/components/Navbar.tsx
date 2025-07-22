@@ -78,7 +78,7 @@ export const Navbar = () => {
                             shadow-md focus:outline-none focus:ring-4 focus:ring-[#00BFFF]/70 transition-transform hover:cursor-pointer"
                             aria-label="Começar projeto"
                         >
-                            Começar Projeto
+                            Entre em Contato
                         </button>
                     </div>
 
