@@ -1,5 +1,4 @@
 'use client';
-import Link from 'next/link';
 import React, { useState } from 'react';
 import { Typewriter } from 'react-simple-typewriter';
 
@@ -51,28 +50,15 @@ export default function Hero() {
           integrando soluções completas com Node.js, MySQL, PostgreSQL, JavaScript e TypeScript.
         </p>
 
-        <Link href={'/#contato'}
+        <button 
           onClick={() => scrollToSection('contato')}
           className="inline-block mt-8 bg-[#00BFFF] hover:bg-gray-400 text-white px-10 py-4 rounded-xl text-xl font-semibold shadow-lg transition
           transform focus:outline-none focus:ring-4 focus:ring-[#00BFFF]/80 hover:cursor-pointer"
-          aria-label="Fale comigo"
         >
           Fale comigo
-        </Link>
+        </button>
       </div>
 
-      <style jsx>{`
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-  `}</style>
     </section>
 
   );
