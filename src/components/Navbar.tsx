@@ -25,8 +25,7 @@ export const Navbar = () => {
 
     return (
         <header
-            className='fixed top-0 left-0 right-0 z-50 transition-colors duration-300 
-                  backdrop-blur-md shadow-lg'
+            className='fixed top-0 left-0 right-0 z-50 transition-colors duration-300 backdrop-blur-md shadow-lg bg-gray-100'
         >
             <div className="container mx-auto px-6">
                 <div className="flex items-center justify-between h-16 lg:h-20">
@@ -95,7 +94,7 @@ export const Navbar = () => {
                 {/* Mobile Menu */}
                 {isMenuOpen && (
                     <nav
-                        className={`lg:hidden absolute left-0 right-0 backdrop-blur-md shadow-lg`}
+                        className={`lg:hidden absolute left-0 right-0 backdrop-blur-md bg-gray-100 shadow-lg`}
                         role="menu"
                         aria-label="Menu móvel"
                     >
