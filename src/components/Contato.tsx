@@ -17,7 +17,7 @@ export default function Contato() {
         viewport={{ once: true }}
         transition={{ duration: 0.7 }}
       >
-        <h2 className="text-4xl font-poppins font-bold mb-6 text-[#00BFFF]">Entre em Contato</h2>
+        <h2 className="text-4xl font-poppins font-bold mb-6 text-[#006080]">Entre em Contato</h2>
         <p className="text-gray-500 mb-12 leading-relaxed text-xl">
           Tem um projeto em mente ou quer conversar? Envie uma mensagem!
         </p>
@@ -35,7 +35,7 @@ export default function Contato() {
               name="nome"
               placeholder="Seu nome"
               required
-              className="w-full p-5 rounded-3xl shadow-md bg-white border border-gray-400 text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#00BFFF]/80 transition"
+              className="w-full p-5 rounded-3xl shadow-md bg-white border border-gray-400 text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#006080] transition"
               aria-label="Nome"
             />
             <input
@@ -43,7 +43,7 @@ export default function Contato() {
               name="email"
               placeholder="Seu email"
               required
-              className="w-full p-5 rounded-3xl shadow-md bg-white border border-gray-400 text-black placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-[#00BFFF]/80 transition"
+              className="w-full p-5 rounded-3xl shadow-md bg-white border border-gray-400 text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#006080] transition"
               aria-label="Email"
             />
           </div>
@@ -52,13 +52,13 @@ export default function Contato() {
             name="mensagem"
             placeholder="Escreva sua mensagem..."
             required
-            className="w-full p-5 rounded-3xl shadow-md bg-white border border-gray-400 text-black placeholder-gray-500 focus:outline-none focus:ring-4 focus:ring-[#00BFFF]/80 transition resize-none min-h-[140px]"
+            className="w-full p-5 rounded-3xl shadow-md bg-white border border-gray-400 text-black placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-[#006080] transition resize-none min-h-[140px]"
             aria-label="Mensagem"
           />
 
           <button
             type="submit"
-            className="bg-[#00BFFF] hover:bg-gray-400 text-white hover:cursor-pointer px-8 py-4 rounded-3xl transition shadow-lg font-semibold focus:outline-none focus:ring-4 focus:ring-[#00BFFF]/90"
+            className="bg-[#006080] hover:bg-gray-400 text-white hover:cursor-pointer px-8 py-4 rounded-xl transition shadow-lg font-semibold focus:outline-none focus:ring-4 focus:ring-[#00BFFF]/90"
             aria-label="Enviar mensagem"
           >
             Enviar Mensagem

@@ -11,35 +11,22 @@ export default function Projects() {
       link: "https://mystockpro.netlify.app/",
     },
     {
-      title: "Landing Page para Agência",
+      title: "Landing Page",
       description: "Página otimizada para captação de leads, com design moderno e foco em conversão.",
       image: "/auralink.png",
       link: "https://auralinkforweb.netlify.app/",
     },
     {
-      title: "Gestão de Pessoal",
-      description: "Sistema de gestão de RH com painel administrativo, controle de colaboradores, folha de pagamento e relatórios automatizados.",
-      image: "/rh.png",
-      link: "https://myrhpro.netlify.app",
+      title: "Plataforma Educagil",
+      description: "Plataforma de ensino online com área para alunos e professores. Ainda estamos em construção",
+      image: "/educagil.png",
+      link: "https://testeducaagil.netlify.app",
     },
   ];
 
-  const container = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { staggerChildren: 0.2 },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
 
   return (
-    <section id="projetos" className="bg-white py-20 px-4 text-[#00BFFF] relative z-10">
+    <section id="projetos" className="bg-white py-20 px-4 text-[#006080] relative z-10">
       <img src="/bg-mar.png" alt="Imagem de fundo" className="absolute inset-0 w-full h-full opacity-40 -z-1" />
       
       <div className="max-w-6xl mx-auto text-center">
@@ -58,13 +45,12 @@ export default function Projects() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="text-gray-400 mb-12 max-w-full mx-auto text-xl"
+          className="text-gray-500 mb-12 max-w-full mx-auto text-xl"
         >
           Confira alguns dos projetos que desenvolvi, aplicando práticas modernas de UI, performance e acessibilidade.
         </motion.p>
 
         <motion.div
-          variants={container}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -73,9 +59,8 @@ export default function Projects() {
           {projetos.map((projeto, index) => (
             <motion.div
               key={index}
-              variants={item}
               className="bg-gray-100 border rounded-3xl shadow-lg hover:shadow-xl transition p-5 space-y-3 cursor-default"
-              whileHover={{ scale: 1.05, boxShadow: "0 0px 20px rgba(0,191,255,0.4)" }}
+              whileHover={{ scale: 0.99, boxShadow: "0 0px 20px #006080 inset" }}
             >
               <img
                 src={projeto.image}
@@ -83,13 +68,13 @@ export default function Projects() {
                 className="w-full h-48 object-fill rounded-2xl"
               />
               <div className="p-2 space-y-3">
-                <h3 className="text-xl font-semibold text-[#00BFFF]">{projeto.title}</h3>
+                <h3 className="text-xl font-semibold text-[#006080]">{projeto.title}</h3>
                 <p className="text-gray-500">{projeto.description}</p>
                 <a
                   href={projeto.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block text-sm text-white bg-[#00BFFF] hover:bg-gray-400 px-4 py-2 rounded-xl transition"
+                  className="inline-block text-sm text-white bg-[#006080] hover:bg-gray-400 px-4 py-2 rounded-xl transition"
                 >
                   Ver Projeto
                 </a>

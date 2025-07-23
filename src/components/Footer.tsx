@@ -23,7 +23,7 @@ export default function Footer() {
   ];
 
   return (
-    <footer className="bg-white text-gray-400 py-8 px-4">
+    <footer className="bg-white text-gray-500 py-8 px-4">
       <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
         <p className="text-sm text-center md:text-left">
           © {new Date().getFullYear()} Yan Monteiro. Todos os direitos reservados.
@@ -37,9 +37,8 @@ export default function Footer() {
               target="_blank"
               rel="noopener noreferrer"
               aria-label={label}
-              whileHover={{ scale: 1.2, color: '#00BFFF' }}
-              whileFocus={{ scale: 1.2, color: '#00BFFF' }}
-              className="transition-colors text-gray-400"
+              whileHover={{ scale: 1.2, color: '#006080' }}
+              className="transition-colors text-gray-500"
             >
               {icon}
             </motion.a>

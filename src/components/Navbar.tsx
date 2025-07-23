@@ -26,7 +26,7 @@ export const Navbar = () => {
     return (
         <header
             className='fixed top-0 left-0 right-0 z-50 transition-colors duration-300 
-                  backdrop-blur-md shadow-lg bg-white'
+                  backdrop-blur-md shadow-lg'
         >
             <div className="container mx-auto px-6">
                 <div className="flex items-center justify-between h-16 lg:h-20">
@@ -36,7 +36,6 @@ export const Navbar = () => {
                         className="flex items-center space-x-3 cursor-pointer"
                         role="link"
                         tabIndex={0}
-                        onKeyDown={(e) => (e.key === 'Enter' ? scrollToSection('home') : null)}
                         aria-label="Ir para início"
                     >
                         <img
@@ -44,10 +43,10 @@ export const Navbar = () => {
                             alt="Logo Yan Monteiro"
                             width={50}
                             height={50}
-                            className='rounded-full shadow-sm shadow-[#00BFFF]' 
+                            className='rounded-full shadow-sm shadow-[#006080]' 
                         />
                         <span className='text-xl lg:text-2xl font-poppins font-semibold select-none
-                             text-[#00BFFF] '>
+                             text-[#006080] '>
                             Yan Monteiro
                         </span>
                     </div>
@@ -62,7 +61,7 @@ export const Navbar = () => {
                             <button
                                 key={section}
                                 onClick={() => scrollToSection(section)}
-                                className='text-xl  text-[#00BFFF] hover:text-gray-400 hover:cursor-pointer'
+                                className='text-lg text-[#006080] hover:text-gray-400 hover:cursor-pointer font-bold'
                                 aria-label={`Ir para a seção ${section}`}
                             >
                                 {section.charAt(0).toUpperCase() + section.slice(1)}
@@ -74,9 +73,8 @@ export const Navbar = () => {
                     <div className="hidden lg:block">
                         <button
                             onClick={() => scrollToSection('contato')}
-                            className="bg-[#00BFFF] hover:bg-gray-400 text-white px-7 py-2 rounded-xl font-semibold 
-                            shadow-md focus:outline-none focus:ring-4 focus:ring-[#00BFFF]/70 transition-transform hover:cursor-pointer"
-                            aria-label="Começar projeto"
+                            className="bg-[#006080] hover:bg-gray-400 text-white px-7 py-2 rounded-xl font-semibold 
+                            shadow-md  transition-transform hover:cursor-pointer"
                         >
                             Entre em Contato
                         </button>

@@ -24,27 +24,10 @@ export default function Services() {
     },
   ];
 
-  // Variants para animação
-  const container = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        staggerChildren: 0.2,
-      },
-    },
-  };
-
-  const item = {
-    hidden: { opacity: 0, y: 20 },
-    visible: { opacity: 1, y: 0 },
-  };
-
   return (
     <section
       id="serviços"
-      className="bg-white py-24 px-6 text-[#00BFFF] min-h-screen flex items-center"
+      className="bg-white py-24 px-6 text-[#006080] min-h-screen flex items-center"
       aria-label="Seção de serviços"
     >
       <div className="max-w-6xl mx-auto text-center">
@@ -63,13 +46,12 @@ export default function Services() {
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ delay: 0.3, duration: 0.6 }}
-          className="text-gray-400 mb-16 max-w-full mx-auto leading-relaxed text-xl"
+          className="text-gray-500 mb-16 max-w-full mx-auto leading-relaxed text-xl"
         >
           Soluções digitais feitas sob medida para destacar sua marca e alavancar seus resultados.
         </motion.p>
 
         <motion.div
-          variants={container}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
@@ -78,14 +60,13 @@ export default function Services() {
           {services.map((service, index) => (
             <motion.div
               key={index}
-              variants={item}
               className="bg-gray-100 border rounded-3xl shadow-lg hover:shadow-xl transition p-10 space-y-6 cursor-default"
-              whileHover={{ scale: 1.07, boxShadow: "0 0px 20px rgba(0,191,255,0.5)" }}
+              whileHover={{ scale: 0.99, boxShadow: "0 0px 15px #006080 inset" }}
               role="article"
               aria-label={service.title}
             >
               <div className="text-5xl flex justify-center">{service.icon}</div>
-              <h3 className="text-2xl font-semibold text-[#00BFFF] font-poppins">{service.title}</h3>
+              <h3 className="text-2xl font-semibold text-gray-500 font-poppins">{service.title}</h3>
               <p className="text-gray-500 leading-relaxed">{service.description}</p>
             </motion.div>
           ))}

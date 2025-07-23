@@ -23,16 +23,16 @@ export default function Sobre() {
             <img
               src="/Perfil.jpg"
               alt="Foto de Yan Monteiro"
-              className="w-52 h-55 object-cover rounded-full border-4 border-[#00BFFF] shadow-lg"
+              className="w-52 h-55 object-cover rounded-full border-4 border-[#006080] shadow-lg"
               loading="lazy"
             />
           </div>
 
           {/* Texto */}
           <div className="text-left space-y-6 max-w-2xl">
-            <h2 className="text-4xl font-poppins font-bold text-[#00BFFF]">Sobre Mim</h2>
-            <p className="text-gray-400 text-xl leading-relaxed">
-              Me chamo <span className="text-[#00BFFF] font-semibold">Yan Monteiro</span>,
+            <h2 className="text-4xl font-poppins font-bold text-[#006080]">Sobre Mim</h2>
+            <p className="text-gray-500 text-xl leading-relaxed">
+              Me chamo <span className="text-[#006080] font-semibold">Yan Monteiro</span>,
               sou desenvolvedor Full-Stack, com foco em Front-end, apaixonado por tecnologia e criação de interfaces intuitivas.
             </p>
             <p className="text-gray-500 leading-relaxed">
