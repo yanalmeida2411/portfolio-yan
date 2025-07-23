@@ -85,7 +85,7 @@ export const Navbar = () => {
                         onClick={() => setIsMenuOpen(!isMenuOpen)}
                         aria-label="Alternar menu móvel"
                         aria-expanded={isMenuOpen}
-                        className={`lg:hidden p-2  text-[#00BFFF] hover:text-gray-400 transition-colors
+                        className={`lg:hidden p-2  text-[#006080] hover:text-gray-400 transition-colors
                          focus:outline-none rounded hover:cursor-pointer`}
                     >
                         {isMenuOpen ? <BiX size={28} /> : <BiMenu size={28} />}
@@ -95,7 +95,7 @@ export const Navbar = () => {
                 {/* Mobile Menu */}
                 {isMenuOpen && (
                     <nav
-                        className={`lg:hidden absolute top-full left-0 right-0 backdrop-blur-md shadow-lg bg-white`}
+                        className={`lg:hidden absolute left-0 right-0 backdrop-blur-md shadow-lg`}
                         role="menu"
                         aria-label="Menu móvel"
                     >
@@ -104,8 +104,7 @@ export const Navbar = () => {
                                 <button
                                     key={section}
                                     onClick={() => scrollToSection(section)}
-                                    className={`px-6 py-4 text-[#00BFFF] hover:text-white hover:bg-[#00BFFF] font-medium transition-colors 
-                                    focus:outline-none hover:cursor-pointer `}
+                                    className={`px-6 py-4 text-[#006080] hover:text-white hover:bg-gray-400 font-medium transition-colors hover:cursor-pointer `}
                                     role="menuitem"
                                 >
                                     {section.charAt(0).toUpperCase() + section.slice(1)}
@@ -114,11 +113,11 @@ export const Navbar = () => {
                             <div className="px-6 py-3 flex justify-center">
                                 <button
                                     onClick={() => scrollToSection('contato')}
-                                    className="bg-[#00BFFF] hover:bg-gray-400 text-white px-7 py-2 rounded-xl font-semibold 
-                            shadow-md focus:outline-none focus:ring-4 focus:ring-[#00BFFF]/70 transition-transform hover:cursor-pointer "
+                                    className="bg-[#006080] hover:bg-gray-400 text-white px-7 py-2 rounded-xl font-semibold 
+                            shadow-md  transition-transform hover:cursor-pointer "
                                     aria-label="Começar projeto"
                                 >
-                                    Começar Projeto
+                                    Entre em Contato
                                 </button>
                             </div>
                         </div>

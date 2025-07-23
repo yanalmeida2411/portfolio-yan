@@ -45,7 +45,7 @@ export default function Hero() {
           />
         </h2>
 
-        <p className="text-black max-w-xl text-lg mx-auto leading-relaxed">
+        <p className="text-black max-w-xl md:text-lg mx-auto leading-relaxed">
           Desenvolvo interfaces modernas, responsivas e acessíveis com React, Next.js e Tailwind CSS,
           integrando soluções completas com Node.js, MySQL, PostgreSQL, JavaScript e TypeScript.
         </p>
