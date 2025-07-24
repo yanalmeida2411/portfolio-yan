@@ -17,7 +17,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen bg-[#F9FAFB] flex flex-col items-center justify-center px-6 text-black"
+      className="min-h-screen bg-[#F9FAFB] flex flex-col items-center justify-center px-6 text-gray-700"
       aria-label="Seção inicial"
       style={{ animation: 'fadeIn 1s ease forwards' }}
     >
@@ -29,12 +29,12 @@ export default function Hero() {
           <span className="text-[#006080]">Yan Monteiro</span>
         </h1>
 
-        <h2 className="text-3xl md:text-4xl font-semibold text-gray-500 h-12 md:h-14">
+        <h2 className="text-2xl md:text-4xl font-semibold text-gray-500 h-12 md:h-14">
           <Typewriter
             words={[
               'Desenvolvedor Full-Stack',
               'Criador de Interfaces',
-              'Apaixonado por Tecnologia',
+              'Web Designer',
             ]}
             loop={true}
             cursor
@@ -45,7 +45,7 @@ export default function Hero() {
           />
         </h2>
 
-        <p className="text-black max-w-xl md:text-lg mx-auto leading-relaxed">
+        <p className="text-gray-700 max-w-xl md:text-lg mx-auto leading-relaxed">
           Desenvolvo interfaces modernas, responsivas e acessíveis com React, Next.js e Tailwind CSS,
           integrando soluções completas com Node.js, MySQL, PostgreSQL, JavaScript e TypeScript.
         </p>
