@@ -5,10 +5,10 @@ import { motion } from 'framer-motion';
 export default function Projects() {
   const projetos = [
     {
-      title: "Sistema de Estoque",
-      description: "Aplicação web completa com controle de entrada e saída de produtos, login e dashboard interativo.",
-      image: "/estoque.png",
-      link: "https://mystockpro.netlify.app/",
+      title: "MyBlog",
+      description: "Um espaço para desenvolvedores publicarem artigos, tutoriais e dicas, ajudando a comunidade a crescer através do compartilhamento de conhecimento.",
+      image: "/myblog.png",
+      link: "https://mynetblog.netlify.app/",
     },
     {
       title: "Landing Page",
