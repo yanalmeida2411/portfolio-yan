@@ -1,36 +1,57 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 💻 Portfólio — Yan Monteiro
 
-## Getting Started
+Bem-vindo ao meu portfólio!  
+Desenvolvo **interfaces modernas, responsivas e acessíveis** utilizando **React**, **Next.js** , **Tailwind CSS**, **JavaScript** e **TypeScript** integrando soluções completas com **Node.js**, **NestJS** , **MySQL** e **PostgreSQL**
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## 🚀 Sobre mim
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Sou desenvolvedor com foco em **experiência do usuário (UX)** e **boas práticas de código**.  
+Meu objetivo é transformar ideias em produtos digitais funcionais e eficientes, desde o frontend até o backend.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🛠️ Tecnologias que utilizo
 
-## Learn More
+**Frontend**
+-  React.js
+-  Next.js
+-  Tailwind CSS
+-  JavaScript (ES6+)
+-  TypeScript
 
-To learn more about Next.js, take a look at the following resources:
+**Backend**
+-  Node.js
+-  Express
+-  MySQL & PostgreSQL
+-  Prisma ORM
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Outras Skills**
+- Git & GitHub
+- API REST
+- Autenticação JWT
+- Deploy (Vercel, Railway, Render)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+## 📌 Projetos em destaque
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+-  **[Sistema de Barbearia](https://github.com/yanalmeida2411/BarberProject)** — Agendamento e gestão de serviços.
+-  **[MyBlog](https://github.com/yanalmeida2411/myblog)** — Plataforma para desenvolvedores compartilharem conhecimento.
+-  **[Sistema de Estoque](https://github.com/yanalmeida2411/PioneiroEstoque)** — Controle de estoque com vendas.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+*(Acesse meu perfil para ver todos os projetos)*
+
+---
+
+## 📫 Contato
+
+-  **Portfólio online:** [https://seuportifolio.com](https://seuportifolio.com)  
+-  **Email:** yanalmeida2411@gmail.com  
+-  **LinkedIn:** [linkedin.com/in/yanmonteiro](https://www.linkedin.com/in/yanmonteiro88/)  
+
+---
+
+⭐ *Se gostou dos meus projetos, não esqueça de deixar uma estrela nos repositórios!* ⭐
+
