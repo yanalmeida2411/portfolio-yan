@@ -33,7 +33,7 @@ export default function Sobre() {
             <h2 className="text-4xl font-poppins font-bold text-[#006080]">Sobre Mim</h2>
             <p className="text-gray-500 text-xl leading-relaxed">
               Me chamo <span className="text-[#006080] font-semibold">Yan Monteiro</span>,
-              sou desenvolvedor Full-Stack, com foco em Front-end, apaixonado por tecnologia e criação de interfaces intuitivas.
+              sou desenvolvedor Full-Stack apaixonado por tecnologia e criação de interfaces intuitivas.
             </p>
             <p className="text-gray-500 leading-relaxed">
               Desenvolvo interfaces modernas, responsivas e acessíveis utilizando <strong>React</strong>, <strong>Next.js</strong> , <strong>Tailwind CSS</strong>, <strong>JavaScript</strong> e <strong>TypeScript</strong>, sempre com foco em performance e usabilidade.

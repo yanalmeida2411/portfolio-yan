@@ -8,6 +8,7 @@ import {
     SiTypescript,
     SiPostgresql,
     SiMysql,
+    SiNestjs,
 } from 'react-icons/si';
 
 const technologies = [
@@ -15,6 +16,7 @@ const technologies = [
     { name: 'Next.js', icon: <SiNextdotjs className="text-black" /> },
     { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-cyan-300" /> },
     { name: 'Node.js', icon: <FaNodeJs className="text-green-500" /> },
+    { name: 'NestJS', icon: <SiNestjs className="text-red-500" /> },
     { name: 'JavaScript', icon: <FaJs className="text-yellow-400" /> },
     { name: 'TypeScript', icon: <SiTypescript className="text-blue-500" /> },
     { name: 'MySQL', icon: <SiMysql className="text-orange-400" /> },
