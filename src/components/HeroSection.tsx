@@ -46,7 +46,7 @@ export default function Hero() {
         </h2>
 
         <p className="text-gray-700 max-w-xl md:text-lg mx-auto leading-relaxed">
-          Desenvolvo interfaces modernas, responsivas e acessíveis com React, Next.js e Tailwind CSS,
+          Desenvolvo interfaces modernas, responsivas e acessíveis com React, Next.js , React Native e Tailwind CSS,
           integrando soluções completas com Node.js, MySQL, PostgreSQL, JavaScript e TypeScript.
         </p>
 

@@ -10,11 +10,13 @@ import {
     SiMysql,
     SiNestjs,
 } from 'react-icons/si';
+import { TbBrandReactNative } from 'react-icons/tb';
 
 const technologies = [
     { name: 'React', icon: <FaReact className="text-cyan-400" /> },
     { name: 'Next.js', icon: <SiNextdotjs className="text-black" /> },
     { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-cyan-300" /> },
+    { name: 'React Native', icon: <TbBrandReactNative className="text-cyan-300" /> },
     { name: 'Node.js', icon: <FaNodeJs className="text-green-500" /> },
     { name: 'NestJS', icon: <SiNestjs className="text-red-500" /> },
     { name: 'JavaScript', icon: <FaJs className="text-yellow-400" /> },
