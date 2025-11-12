@@ -2,7 +2,7 @@
 import React, { useState } from 'react';
 import { Typewriter } from 'react-simple-typewriter';
 
-export default function Hero() {
+export default function HeroSection() {
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 

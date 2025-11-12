@@ -1,4 +1,4 @@
-'use client';
+'use client'
 import React from 'react';
 import { motion } from 'framer-motion';
 
@@ -10,11 +10,12 @@ export default function Projects() {
       image: "/myblog.png",
       link: "https://mynetblog.netlify.app/",
     },
+
     {
-      title: "Landing Page",
-      description: "Página otimizada para captação de leads, com design moderno e foco em conversão.",
-      image: "/auralink.png",
-      link: "https://auralinkforweb.netlify.app/",
+      title: "Conectando Leitores",
+      description: "Biblioteca online onde usuários podem favoritar, ler e cadastrar obras, enquanto administradores gerenciam a plataforma e o acervo",
+      image: "/ConectandoLeitores.png",
+      link: "https://oraculo.qacoders.dev.br/",
     },
     {
       title: "Plataforma Educagil",
@@ -22,13 +23,19 @@ export default function Projects() {
       image: "/educagil.png",
       link: "https://testeducaagil.netlify.app",
     },
+    {
+      title: "Landing Page",
+      description: "Página otimizada para captação de leads, com design moderno e foco em conversão.",
+      image: "/auralink.png",
+      link: "https://auralinkforweb.netlify.app/",
+    },
   ];
 
 
   return (
     <section id="projetos" className="bg-white py-20 px-4 text-[#006080] relative z-10">
       <img src="/bg-mar.png" alt="Imagem de fundo" className="absolute inset-0 w-full h-full opacity-40 -z-1" />
-      
+
       <div className="max-w-6xl mx-auto text-center">
         <motion.h2
           initial={{ opacity: 0, y: -20 }}
@@ -82,7 +89,7 @@ export default function Projects() {
             </motion.div>
           ))}
         </motion.div>
-        
+
       </div>
     </section>
   );

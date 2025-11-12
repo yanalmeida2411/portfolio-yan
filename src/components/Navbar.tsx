@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react'
 import { BiMenu, BiX } from 'react-icons/bi';
 
-export const Navbar = () => {
+export default  function Navbar() {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [isScrolled, setIsScrolled] = useState(false);
 
@@ -42,7 +42,7 @@ export const Navbar = () => {
                             alt="Logo Yan Monteiro"
                             width={50}
                             height={50}
-                            className='rounded-full shadow-sm shadow-[#006080]' 
+                            className='rounded-full shadow-sm shadow-[#006080]'
                         />
                         <span className='text-xl lg:text-2xl font-poppins font-semibold select-none
                              text-[#006080] '>
@@ -127,5 +127,3 @@ export const Navbar = () => {
 
     )
 }
-
-export default Navbar

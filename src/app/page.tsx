@@ -1,12 +1,12 @@
 import Navbar from "@/components/Navbar";
-import HeroSection from "@/components/HeroSection";
 import Services from "@/components/Services";
 import Projects from "@/components/Projects";
 import About from "@/components/About";
 import Contato from "@/components/Contato";
 import Footer from "@/components/Footer";
+import HeroSection from "@/components/HeroSection";
 
-export default function Home() {
+export default async function Home() {
   return (
     <div>
       <Navbar />
