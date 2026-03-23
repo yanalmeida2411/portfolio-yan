@@ -1,18 +1,18 @@
-# 💻 Portfólio — Yan Monteiro
+# Portfólio — Yan Monteiro
 
 Bem-vindo ao meu portfólio!  
-Desenvolvo **interfaces modernas, responsivas e acessíveis** utilizando **React**, **Next.js** , **Tailwind CSS**, **JavaScript** e **TypeScript** integrando soluções completas com **Node.js**, **NestJS** , **MySQL** e **PostgreSQL**
+Desenvolvo **interfaces modernas, responsivas e acessíveis** utilizando **React**, **Next.js** , **Tailwind CSS**, **JavaScript** e **TypeScript** integrando soluções completas com **Java**, **Spring**, **Node.js**, **NestJS** , **MySQL** e **PostgreSQL**
 
 ---
 
-## 🚀 Sobre mim
+## Sobre mim
 
 Sou desenvolvedor com foco em **experiência do usuário (UX)** e **boas práticas de código**.  
 Meu objetivo é transformar ideias em produtos digitais funcionais e eficientes, desde o frontend até o backend.
 
 ---
 
-## 🛠️ Tecnologias que utilizo
+## Tecnologias que utilizo
 
 **Frontend**
 -  React.js
@@ -24,7 +24,10 @@ Meu objetivo é transformar ideias em produtos digitais funcionais e eficientes,
 **Backend**
 -  Node.js
 -  Express
+-  Java
+-  Spring
 -  MySQL & PostgreSQL
+-  MongoDB
 -  Prisma ORM
 
 **Outras Skills**
@@ -35,23 +38,13 @@ Meu objetivo é transformar ideias em produtos digitais funcionais e eficientes,
 
 ---
 
-## 📌 Projetos em destaque
+## Contato
 
--  **[Sistema de Barbearia](https://github.com/yanalmeida2411/BarberProject)** — Agendamento e gestão de serviços.
--  **[MyBlog](https://github.com/yanalmeida2411/myblog)** — Plataforma para desenvolvedores compartilharem conhecimento.
--  **[Sistema de Estoque](https://github.com/yanalmeida2411/PioneiroEstoque)** — Controle de estoque com vendas.
-
-*(Acesse meu perfil para ver todos os projetos)*
-
----
-
-## 📫 Contato
-
--  **Portfólio online:** [https://seuportifolio.com](https://seuportifolio.com)  
+-  **Portfólio online:** [https://yanmonteiro.com.br](https://yanmonteiro.com.br/)
 -  **Email:** yanalmeida2411@gmail.com  
 -  **LinkedIn:** [linkedin.com/in/yanmonteiro](https://www.linkedin.com/in/yanmonteiro88/)  
 
 ---
 
-⭐ *Se gostou dos meus projetos, não esqueça de deixar uma estrela nos repositórios!* ⭐
+ *Se gostou dos meus projetos, não esqueça de deixar uma estrela nos repositórios!* 
 
