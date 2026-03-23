@@ -24,6 +24,12 @@ export default function Projects() {
       link: "https://testeducaagil.netlify.app",
     },
     {
+      title: "Alpha Play",
+      description: "Plataforma para alfabetização de crianças, com jogos interativos e atividades para tornar o aprendizado divertido e eficaz.",
+      image: "/alpha-play.png",
+      link: "https://kingdom.qacoders.dev.br/"
+    },
+    {
       title: "Landing Page",
       description: "Página otimizada para captação de leads, com design moderno e foco em conversão.",
       image: "/auralink.png",

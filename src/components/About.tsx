@@ -33,11 +33,16 @@ export default function Sobre() {
             <h2 className="text-4xl font-poppins font-bold text-[#006080]">Sobre Mim</h2>
             <p className="text-gray-500 text-xl leading-relaxed">
               Me chamo <span className="text-[#006080] font-semibold">Yan Monteiro</span>,
-              sou desenvolvedor Full-Stack apaixonado por tecnologia e criação de interfaces intuitivas.
+              sou desenvolvedor Full Stack apaixonado por tecnologia e criação de interfaces intuitivas.
             </p>
             <p className="text-gray-500 leading-relaxed">
-              Desenvolvo interfaces modernas, responsivas e acessíveis utilizando <strong>React</strong>, <strong>Next.js</strong> , <strong>Tailwind CSS</strong>, <strong>React Native</strong>, <strong>JavaScript</strong> e <strong>TypeScript</strong>, sempre com foco em performance e usabilidade.
-              Integro soluções completas com tecnologias como <strong>Node.js</strong>,<strong> NestJS</strong>, <strong>MySQL</strong> e <strong>PostgreSQL</strong>.
+              Desenvolvo interfaces modernas, responsivas e acessíveis utilizando <strong>React</strong>,<strong>Next.js</strong>,<strong>React Native</strong> e 
+              <strong> Tailwind CSS</strong>,
+              sempre com foco em performance e usabilidade.
+              Integro soluções completas com tecnologias como <strong>Node.js</strong>,<strong> NestJS</strong>,<strong>Spring</strong>, <strong>MongoDB</strong>,
+              <strong>MySQL</strong> e <strong>PostgreSQL</strong>.
+               As linguagens que utilizo para criar essas experiências digitais impactantes
+              e eficientes são <strong>Java</strong> ,<strong>JavaScript</strong> e <strong>TypeScript</strong>.
             </p>
 
             <p className="text-gray-600 leading-relaxed">

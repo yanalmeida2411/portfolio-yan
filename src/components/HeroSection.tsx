@@ -32,7 +32,7 @@ export default function HeroSection() {
         <h2 className="text-2xl md:text-4xl font-semibold text-gray-500 h-12 md:h-14">
           <Typewriter
             words={[
-              'Desenvolvedor Full-Stack',
+              'Desenvolvedor Full Stack',
               'Criador de Interfaces',
               'Web Designer',
             ]}
@@ -47,7 +47,7 @@ export default function HeroSection() {
 
         <p className="text-gray-700 max-w-xl md:text-lg mx-auto leading-relaxed">
           Desenvolvo interfaces modernas, responsivas e acessíveis com React, Next.js , React Native e Tailwind CSS,
-          integrando soluções completas com Node.js, MySQL, PostgreSQL, JavaScript e TypeScript.
+          integrando soluções completas com Node.js, MySQL, PostgreSQL, utilizando as linguagens Java, JavaScript e TypeScript.
         </p>
 
         <button 
