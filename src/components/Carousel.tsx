@@ -1,7 +1,7 @@
 'use client';
 import { useLayoutEffect, useRef } from 'react';
 import gsap from 'gsap';
-import { FaReact, FaNodeJs, FaJs, FaJava, FaGit, FaGithub } from 'react-icons/fa';
+import { FaReact, FaNodeJs, FaJs, FaJava, FaGithub } from 'react-icons/fa';
 import {
     SiNextdotjs,
     SiTailwindcss,
@@ -10,23 +10,27 @@ import {
     SiMysql,
     SiNestjs,
     SiMongodb,
+    SiDocker,
 } from 'react-icons/si';
 import { TbBrandReactNative } from 'react-icons/tb';
+import { FaGolang } from 'react-icons/fa6';
 
 const technologies = [
     { name: 'JavaScript', icon: <FaJs className="text-yellow-400" /> },
     { name: 'TypeScript', icon: <SiTypescript className="text-blue-500" /> },
-    {name: 'Java', icon: <FaJava className="text-red-500" /> },
+    { name: 'Java', icon: <FaJava className="text-red-500" /> },
+    { name: 'Golang', icon: <FaGolang className="text-cyan-300" /> },
     { name: 'React', icon: <FaReact className="text-cyan-400" /> },
     { name: 'Next.js', icon: <SiNextdotjs className="text-black" /> },
     { name: 'Tailwind CSS', icon: <SiTailwindcss className="text-cyan-300" /> },
     { name: 'React Native', icon: <TbBrandReactNative className="text-cyan-300" /> },
     { name: 'Node.js', icon: <FaNodeJs className="text-green-500" /> },
     { name: 'NestJS', icon: <SiNestjs className="text-red-500" /> },
+    { name: 'Docker', icon: <SiDocker className="text-blue-500" /> },
     { name: 'MySQL', icon: <SiMysql className="text-orange-400" /> },
     { name: 'PostgreSQL', icon: <SiPostgresql className="text-blue-300" /> },
-    {name: 'MongoDB', icon: <SiMongodb className="text-green-400" /> },
-    {name: 'GitHub', icon: <FaGithub className="text-black" /> },
+    { name: 'MongoDB', icon: <SiMongodb className="text-green-400" /> },
+    { name: 'GitHub', icon: <FaGithub className="text-black" /> },
 ];
 
 export default function Carousel() {
@@ -40,7 +44,7 @@ export default function Carousel() {
             gsap.to(".carousel-track", {
                 x: `-${totalWidth}px`,
                 ease: "none",
-                duration: 15,
+                duration: 20,
                 repeat: -1,
             });
         }, carouselRef);

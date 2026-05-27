@@ -36,13 +36,13 @@ export default function Sobre() {
               sou desenvolvedor Full Stack apaixonado por tecnologia e criação de interfaces intuitivas.
             </p>
             <p className="text-gray-500 leading-relaxed">
-              Desenvolvo interfaces modernas, responsivas e acessíveis utilizando <strong>React</strong>,<strong>Next.js</strong>,<strong>React Native</strong> e 
+              Desenvolvo interfaces modernas, responsivas e acessíveis utilizando <strong>React</strong>, <strong>Next.js</strong>, <strong>React Native</strong> e 
               <strong> Tailwind CSS</strong>,
               sempre com foco em performance e usabilidade.
               Integro soluções completas com tecnologias como <strong>Node.js</strong>,<strong> NestJS</strong>,<strong>Spring</strong>, <strong>MongoDB</strong>,
               <strong>MySQL</strong> e <strong>PostgreSQL</strong>.
                As linguagens que utilizo para criar essas experiências digitais impactantes
-              e eficientes são <strong>Java</strong> ,<strong>JavaScript</strong> e <strong>TypeScript</strong>.
+              e eficientes são <strong>Java</strong>, <strong>Golang</strong>, <strong>JavaScript</strong> e <strong>TypeScript</strong>.
             </p>
 
             <p className="text-gray-600 leading-relaxed">
