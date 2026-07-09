@@ -15,7 +15,7 @@ export default function Projects() {
       title: "Conectando Leitores",
       description: "Biblioteca online onde usuários podem favoritar, ler e cadastrar obras, enquanto administradores gerenciam a plataforma e o acervo",
       image: "/ConectandoLeitores.png",
-      link: "https://oraculo.qacoders.dev.br/",
+      link: "https://conectandoleitores.netlify.app/",
     },
     {
       title: "Plataforma Educagil",
@@ -27,7 +27,7 @@ export default function Projects() {
       title: "Alpha Play",
       description: "Plataforma para alfabetização de crianças, com jogos interativos e atividades para tornar o aprendizado divertido e eficaz.",
       image: "/alpha-play.png",
-      link: "https://kingdom.qacoders.dev.br/"
+      link: "https://alphaplayforkids.netlify.app/"
     },
     {
       title: "Landing Page",
