@@ -1,5 +1,4 @@
 'use client'
-import React from 'react';
 import { motion } from 'framer-motion';
 import Carousel from '../components/Carousel';
 
@@ -36,13 +35,13 @@ export default function Sobre() {
               sou desenvolvedor Full Stack apaixonado por tecnologia e criação de interfaces intuitivas.
             </p>
             <p className="text-gray-500 leading-relaxed">
-              Desenvolvo interfaces modernas, responsivas e acessíveis utilizando <strong>React</strong>, <strong>Next.js</strong>, <strong>React Native</strong> e 
-              <strong> Tailwind CSS</strong>,
+              Desenvolvo interfaces modernas, responsivas e acessíveis utilizando <strong className='text-[#006080]'>React</strong>, <strong className='text-[#006080]'>Next.js</strong>, <strong className='text-[#006080]'>React Native</strong> e 
+              <strong className='text-[#006080]'> Tailwind CSS</strong>,
               sempre com foco em performance e usabilidade.
-              Integro soluções completas com tecnologias como <strong>Node.js</strong>,<strong> NestJS</strong>,<strong>Spring</strong>, <strong>MongoDB</strong>,
-              <strong>MySQL</strong> e <strong>PostgreSQL</strong>.
+              Integro soluções completas com tecnologias como <strong className='text-[#006080]'>Node.js</strong>,<strong className='text-[#006080]'> NestJS</strong>,<strong className='text-[#006080]'>Spring</strong>, <strong className='text-[#006080]'>MongoDB</strong>,
+              <strong className='text-[#006080]'>MySQL</strong> e <strong className='text-[#006080]'>PostgreSQL</strong>.
                As linguagens que utilizo para criar essas experiências digitais impactantes
-              e eficientes são <strong>Java</strong>, <strong>Golang</strong>, <strong>JavaScript</strong> e <strong>TypeScript</strong>.
+              e eficientes são <strong className='text-[#006080]'>Java</strong>, <strong className='text-[#006080]'>Golang</strong>, <strong className='text-[#006080]'>JavaScript</strong> e <strong className='text-[#006080]'>TypeScript</strong>.
             </p>
 
             <p className="text-gray-600 leading-relaxed">
