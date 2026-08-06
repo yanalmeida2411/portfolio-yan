@@ -1,21 +1,24 @@
+import { LangProvider } from "@/components/LangProvider";
 import Navbar from "@/components/Navbar";
-import Services from "@/components/Services";
+import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
+import Stack from "@/components/Stack";
 import About from "@/components/About";
-import Contato from "@/components/Contato";
+import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
-import HeroSection from "@/components/HeroSection";
 
-export default async function Home() {
+export default function Home() {
   return (
-    <div>
+    <LangProvider>
       <Navbar />
-      <HeroSection />
-      <Services />
-      <Projects />
-      <About />
-      <Contato />
+      <main>
+        <Hero />
+        <Projects />
+        <Stack />
+        <About />
+        <Contact />
+      </main>
       <Footer />
-    </div>
+    </LangProvider>
   );
 }

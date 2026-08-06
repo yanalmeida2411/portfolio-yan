@@ -1,58 +1,40 @@
-'use client'
-import { motion } from 'framer-motion';
-import Carousel from '../components/Carousel';
+"use client";
 
-export default function Sobre() {
+import { useLang } from "./LangProvider";
+import { LINKS } from "@/lib/content";
+
+export default function About() {
+  const { t } = useLang();
+
   return (
-    <>
-      <section
-        id="sobre"
-        className=" bg-white py-24 px-6 text-white min-h-screen flex flex-col  "
-        aria-label="Seção sobre mim"
-      >
-        <motion.div
-          className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-12"
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          {/* Avatar */}
-          <div className="flex-shrink-0">
-            <img
-              src="/Perfil.jpg"
-              alt="Foto de Yan Monteiro"
-              className="w-52 h-55 object-cover rounded-full border-4 border-[#006080] shadow-lg"
-              loading="lazy"
-            />
-          </div>
-
-          {/* Texto */}
-          <div className="text-left space-y-6 max-w-2xl">
-            <h2 className="text-4xl font-poppins font-bold text-[#006080]">Sobre Mim</h2>
-            <p className="text-gray-500 text-xl leading-relaxed">
-              Me chamo <span className="text-[#006080] font-semibold">Yan Monteiro</span>,
-              sou desenvolvedor Full Stack apaixonado por tecnologia e criação de interfaces intuitivas.
-            </p>
-            <p className="text-gray-500 leading-relaxed">
-              Desenvolvo interfaces modernas, responsivas e acessíveis utilizando <strong className='text-[#006080]'>React</strong>, <strong className='text-[#006080]'>Next.js</strong>, <strong className='text-[#006080]'>React Native</strong> e 
-              <strong className='text-[#006080]'> Tailwind CSS</strong>,
-              sempre com foco em performance e usabilidade.
-              Integro soluções completas com tecnologias como <strong className='text-[#006080]'>Node.js</strong>,<strong className='text-[#006080]'> NestJS</strong>,<strong className='text-[#006080]'>Spring</strong>, <strong className='text-[#006080]'>MongoDB</strong>,
-              <strong className='text-[#006080]'>MySQL</strong> e <strong className='text-[#006080]'>PostgreSQL</strong>.
-               As linguagens que utilizo para criar essas experiências digitais impactantes
-              e eficientes são <strong className='text-[#006080]'>Java</strong>, <strong className='text-[#006080]'>Golang</strong>, <strong className='text-[#006080]'>JavaScript</strong> e <strong className='text-[#006080]'>TypeScript</strong>.
-            </p>
-
-            <p className="text-gray-600 leading-relaxed">
-              Busco constantemente evoluir minhas habilidades técnicas e colaborar em projetos que impactem positivamente a vida das pessoas.
-            </p>
-          </div>
-        </motion.div>
-        <div className="overflow-hidden w-full">
-          <Carousel />
+    <section id="sobre" className="border-b border-[var(--color-divider)]">
+      <div className="container py-[var(--section-y)]">
+        <div className="section-head">
+          <span className="num">03</span>
+          <h2>{t.aboutTitle}</h2>
+          <span className="rule" />
         </div>
-      </section>
-    </>
+
+        <div className="max-w-[760px]">
+          <p className="m-0 mb-[22px] font-[family-name:var(--font-heading)] text-[30px] leading-[1.25] [text-wrap:pretty]">
+            {t.aboutLead}
+          </p>
+          <p className="m-0 mb-4 text-[16px] leading-[1.65] text-[var(--color-body)] [text-wrap:pretty]">
+            {t.aboutP1}
+          </p>
+          <p className="m-0 mb-[26px] text-[16px] leading-[1.65] text-[#5d5d60] [text-wrap:pretty]">
+            {t.aboutP2}
+          </p>
+          <a
+            href={LINKS.linkedin}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn btn-secondary btn-sm"
+          >
+            {t.downloadCv}
+          </a>
+        </div>
+      </div>
+    </section>
   );
 }

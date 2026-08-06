@@ -1,101 +1,144 @@
-'use client'
-import React from 'react';
-import { motion } from 'framer-motion';
+"use client";
+
+import Image from "next/image";
+import { Corners, useLang } from "./LangProvider";
+import { FEATURED_TAGS, LINKS, PROJECTS } from "@/lib/content";
 
 export default function Projects() {
-  const projetos = [
-    {
-      title: "MyBlog",
-      description: "Um espaço para desenvolvedores publicarem artigos, tutoriais e dicas, ajudando a comunidade a crescer através do compartilhamento de conhecimento.",
-      image: "/myblog.png",
-      link: "https://mynetblog.netlify.app/",
-    },
-
-    {
-      title: "Conectando Leitores",
-      description: "Biblioteca online onde usuários podem favoritar, ler e cadastrar obras, enquanto administradores gerenciam a plataforma e o acervo",
-      image: "/ConectandoLeitores.png",
-      link: "https://conectandoleitores.netlify.app/",
-    },
-    {
-      title: "Plataforma Educagil",
-      description: "Plataforma de ensino online com área para alunos e professores. Ainda estamos em construção",
-      image: "/educagil.png",
-      link: "https://testeducaagil.netlify.app",
-    },
-    {
-      title: "Alpha Play",
-      description: "Plataforma para alfabetização de crianças, com jogos interativos e atividades para tornar o aprendizado divertido e eficaz.",
-      image: "/alpha-play.png",
-      link: "https://alphaplayforkids.netlify.app/"
-    },
-    {
-      title: "Landing Page",
-      description: "Página otimizada para captação de leads, com design moderno e foco em conversão.",
-      image: "/auralink.png",
-      link: "https://auralinkforweb.netlify.app/",
-    },
-  ];
-
+  const { lang, t } = useLang();
+  const projects = PROJECTS[lang];
 
   return (
-    <section id="projetos" className="bg-white py-20 px-4 text-[#006080] relative z-10">
-      <img src="/bg-mar.png" alt="Imagem de fundo" className="absolute inset-0 w-full h-full opacity-40 -z-1" />
+    <section id="projetos" className="border-b border-[var(--color-divider)]">
+      <div className="container py-[var(--section-y)]">
+        <div className="section-head">
+          <span className="num">01</span>
+          <h2>{t.projectsTitle}</h2>
+          <span className="rule" />
+          <span className="meta">{t.projectsCount}</span>
+        </div>
 
-      <div className="max-w-6xl mx-auto text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: -20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-4xl font-bold mb-4"
-        >
-          Últimos Projetos
-        </motion.h2>
+        {/* — case principal — */}
+        <article className="blueprint mb-[52px] grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr]">
+          <div className="flex items-center justify-center border-b border-[var(--color-divider)] p-6 lg:border-b-0 lg:border-r">
+            <Image
+              src="/ConectandoLeitores.png"
+              alt="Conectando Leitores"
+              width={900}
+              height={560}
+              className="h-auto w-full border border-[var(--color-divider)]"
+            />
+          </div>
 
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.3, duration: 0.6 }}
-          className="text-gray-500 mb-12 max-w-full mx-auto text-xl"
-        >
-          Confira alguns dos projetos que desenvolvi, aplicando práticas modernas de UI, performance e acessibilidade.
-        </motion.p>
+          <div className="flex flex-col p-[34px] pb-[30px]">
+            <div className="mb-[18px] flex items-center gap-[10px]">
+              <span className="bg-[var(--color-accent)] px-[9px] py-1 text-[10px] uppercase tracking-[0.14em] text-[var(--color-bg)]">
+                {t.featured}
+              </span>
+              <span className="label">PRJ / 01</span>
+            </div>
 
-        <motion.div
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          className="grid md:grid-cols-3 gap-8"
-        >
-          {projetos.map((projeto, index) => (
-            <motion.div
-              key={index}
-              className="bg-gray-100 border rounded-3xl shadow-lg hover:shadow-xl transition p-5 space-y-3 cursor-default"
-              whileHover={{ scale: 0.99, boxShadow: "0 0px 20px #006080 inset" }}
-            >
-              <img
-                src={projeto.image}
-                alt={projeto.title}
-                className="w-full h-48 object-fill rounded-2xl"
-              />
-              <div className="p-2 space-y-3">
-                <h3 className="text-xl font-semibold text-[#006080]">{projeto.title}</h3>
-                <p className="text-gray-500">{projeto.description}</p>
+            <h3 className="m-0 mb-[14px] font-[family-name:var(--font-heading)] text-[46px] uppercase leading-none">
+              Conectando
+              <br />
+              Leitores
+            </h3>
+
+            <p className="m-0 mb-5 text-[15px] leading-[1.6] text-[var(--color-body)] [text-wrap:pretty]">
+              {t.featuredBody}
+            </p>
+
+            <dl className="m-0 mb-[22px] border-t border-[var(--color-divider)]">
+              {t.featuredSpecs.map((row) => (
+                <div
+                  key={row.k}
+                  className="flex gap-4 border-b border-[color-mix(in_srgb,var(--color-text)_8%,transparent)] py-[10px]"
+                >
+                  <dt className="label w-[86px] flex-none pt-[2px]">{row.k}</dt>
+                  <dd className="m-0 text-[14px] leading-[1.45]">{row.v}</dd>
+                </div>
+              ))}
+            </dl>
+
+            <div className="mb-6 flex flex-wrap gap-[7px]">
+              {FEATURED_TAGS.map((tag) => (
+                <span key={tag} className="tag tag-outline">
+                  {tag}
+                </span>
+              ))}
+            </div>
+
+            <div className="mt-auto flex flex-wrap gap-[10px]">
+              <a
+                href={LINKS.featuredDemo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-primary btn-sm blueprint"
+              >
+                {t.liveDemo}
+                <Corners />
+              </a>
+              <a
+                href={LINKS.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn btn-secondary btn-sm"
+              >
+                {t.code}
+              </a>
+            </div>
+          </div>
+          <Corners />
+        </article>
+
+        {/* — grade dos demais projetos — */}
+        <div className="grid grid-cols-1 gap-[26px] sm:grid-cols-2 xl:grid-cols-4">
+          {projects.map((p) => (
+            <article key={p.title} className="blueprint flex flex-col">
+              <div className="border-b border-[var(--color-divider)]">
+                <Image
+                  src={p.image}
+                  alt={p.title}
+                  width={640}
+                  height={400}
+                  className="block h-auto w-full object-cover [aspect-ratio:16/10] [object-position:top]"
+                />
+              </div>
+              <div className="flex flex-1 flex-col p-[18px] pb-5">
+                <div className="mb-[10px] flex items-center justify-between">
+                  <span className="label">{p.ref}</span>
+                  <span className="label !text-[#597ea3]">{p.status}</span>
+                </div>
+                <h3 className="m-0 mb-2 font-[family-name:var(--font-heading)] text-2xl uppercase leading-[1.05]">
+                  {p.title}
+                </h3>
+                <p className="m-0 mb-[14px] flex-1 text-[13px] leading-[1.55] text-[#5d5d60] [text-wrap:pretty]">
+                  {p.description}
+                </p>
+                <div className="mb-4 flex flex-wrap gap-[6px]">
+                  {p.tags.map((tag) => (
+                    <span
+                      key={tag}
+                      className="border border-[color-mix(in_srgb,var(--color-accent)_40%,transparent)] px-[7px] py-[3px] text-[10px] uppercase tracking-[0.08em] text-[var(--color-accent-700)]"
+                    >
+                      {tag}
+                    </span>
+                  ))}
+                </div>
                 <a
-                  href={projeto.link}
+                  href={p.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-block text-sm text-white bg-[#006080] hover:bg-gray-400 px-4 py-2 rounded-xl transition"
+                  className="flex justify-between border-t border-[var(--color-divider)] pt-3 font-[family-name:var(--font-heading)] text-[13px] uppercase tracking-[0.1em]"
                 >
-                  Ver Projeto
+                  <span>{t.viewProject}</span>
+                  <span aria-hidden="true">→</span>
                 </a>
               </div>
-            </motion.div>
+              <Corners />
+            </article>
           ))}
-        </motion.div>
-
+        </div>
       </div>
     </section>
   );
