@@ -16,7 +16,7 @@ export default function About() {
         </div>
 
         <div className="max-w-[760px]">
-          <p className="m-0 mb-[22px] font-[family-name:var(--font-heading)] text-[30px] leading-[1.25] [text-wrap:pretty]">
+          <p className="m-0 mb-[22px] font-[family-name:var(--font-heading)] text-[clamp(22px,5.5vw,30px)] leading-[1.25] [text-wrap:pretty]">
             {t.aboutLead}
           </p>
           <p className="m-0 mb-4 text-[16px] leading-[1.65] text-[var(--color-body)] [text-wrap:pretty]">

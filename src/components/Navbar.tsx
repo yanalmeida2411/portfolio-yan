@@ -28,13 +28,13 @@ export default function Navbar() {
 
   return (
     <header className="sticky top-0 z-[60] border-b border-[var(--color-divider)] bg-[color-mix(in_srgb,var(--color-bg)_88%,transparent)] backdrop-blur-[10px]">
-      <div className="container flex h-[62px] items-center gap-8">
-        <a href="#top" className="mr-auto flex items-center gap-[10px] text-inherit">
-          <Image src="/logo_ic.svg" alt="" width={22} height={22} />
-          <span className="font-[family-name:var(--font-heading)] text-[19px] font-semibold tracking-[0.01em]">
+      <div className="container flex h-[58px] items-center gap-3 sm:h-[62px] sm:gap-4 md:gap-8">
+        <a href="#top" className="mr-auto flex min-w-0 items-center gap-2 text-inherit sm:gap-[10px]">
+          <Image src="/logo_ic.svg" alt="" width={22} height={22} className="flex-none" />
+          <span className="truncate font-[family-name:var(--font-heading)] text-[16px] font-semibold tracking-[0.01em] sm:text-[19px]">
             YAN MONTEIRO
           </span>
-          <span className="whitespace-nowrap border-l border-[var(--color-divider)] pl-[10px] text-[10px] uppercase tracking-[0.14em] text-[#597ea3]">
+          <span className="hidden whitespace-nowrap border-l border-[var(--color-divider)] pl-[10px] text-[10px] uppercase tracking-[0.14em] text-[#597ea3] sm:inline">
             Full Stack
           </span>
         </a>
@@ -46,7 +46,7 @@ export default function Navbar() {
           <a href="#contato" className={NAV_LINK}>{t.navContact}</a>
         </nav>
 
-        <div className="flex items-center gap-3">
+        <div className="flex flex-none items-center gap-2 sm:gap-3">
           <div className="flex border border-[var(--color-divider)]">
             <button
               type="button"
@@ -65,7 +65,7 @@ export default function Navbar() {
               EN
             </button>
           </div>
-          <a href="#contato" className="btn btn-primary btn-xs blueprint">
+          <a href="#contato" className="btn btn-primary btn-xs blueprint hidden md:inline-flex">
             {t.navCta}
             <Corners />
           </a>
@@ -106,6 +106,14 @@ export default function Navbar() {
                 {t[item.key]}
               </a>
             ))}
+            <a
+              href="#contato"
+              onClick={() => setOpen(false)}
+              className="btn btn-primary btn-sm blueprint mt-4 mb-2 w-full justify-center"
+            >
+              {t.navCta}
+              <Corners />
+            </a>
           </div>
         </nav>
       )}

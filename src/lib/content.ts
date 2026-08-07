@@ -12,8 +12,8 @@ export type Project = {
 
 export const FEATURED_TAGS = [
   "Next.js",
+  "NestJS",
   "TypeScript",
-  "Node.js",
   "PostgreSQL",
   "JWT",
 ];
@@ -23,8 +23,7 @@ export const LINKS = {
   linkedin: "https://www.linkedin.com/in/yanmonteiro88/",
   github: "https://github.com/yanalmeida2411",
   site: "https://yanmonteiro.com.br",
-  featuredDemo: "https://conectandoleitores.netlify.app/",
-  // troque por um endpoint próprio (API route) se preferir não usar formsubmit
+  featuredDemo: "https://smallville.qacoders.dev.br/",
   form: "https://formsubmit.co/yanalmeida2411@gmail.com",
 };
 
@@ -43,22 +42,22 @@ export const COPY = {
     seeProjects: "Ver projetos",
     downloadCv: "Currículo no LinkedIn",
     projectsTitle: "Projetos",
-    projectsCount: "05 em produção",
+    projectsCount: "04 em produção",
     featured: "Destaque",
     featuredBody:
-      "Biblioteca online completa: leitores favoritam, leem e cadastram obras; administradores gerenciam acervo e usuários por um painel próprio.",
+      "Plataforma completa de venda de ingressos de cinema: administradores cadastram cinemas, filmes e sessões; usuários compram ingressos filtrando por localidade e cinema.",
     featuredSpecs: [
       {
         k: "Problema",
-        v: "Acervos de leitura comunitários sem catálogo digital nem controle de acesso.",
+        v: "Cinemas sem um sistema próprio de venda de ingressos online, dependendo de processos manuais ou de terceiros.",
       },
       {
         k: "Solução",
-        v: "Catálogo com autenticação, favoritos e painel administrativo com dois níveis de permissão.",
+        v: "Plataforma com painel admin para cadastro de cinemas, filmes e sessões, e fluxo de compra por localidade e cinema.",
       },
       {
         k: "Meu papel",
-        v: "Projeto do schema, API, autenticação e toda a interface.",
+        v: "Desenvolvimento fullstack com NestJS e Next.js, e participação na criação do fluxograma do sistema.",
       },
     ],
     liveDemo: "Ver ao vivo",
@@ -128,22 +127,22 @@ export const COPY = {
     seeProjects: "See work",
     downloadCv: "Résumé on LinkedIn",
     projectsTitle: "Selected work",
-    projectsCount: "05 shipped",
+    projectsCount: "04 shipped",
     featured: "Featured",
     featuredBody:
-      "A full online library: readers favorite, read and submit titles; admins manage the collection and users through a dedicated panel.",
+      "A full movie ticketing platform: admins register cinemas, movies and showtimes; users buy tickets filtering by location and cinema.",
     featuredSpecs: [
       {
         k: "Problem",
-        v: "Community reading collections with no digital catalog and no access control.",
+        v: "Cinemas with no online ticket sales system of their own, relying on manual processes or third parties.",
       },
       {
         k: "Solution",
-        v: "Catalog with authentication, favorites and an admin panel with two permission levels.",
+        v: "Platform with an admin panel to register cinemas, movies and showtimes, plus a purchase flow by location and cinema.",
       },
       {
         k: "My role",
-        v: "Schema design, API, authentication and the entire interface.",
+        v: "Full stack development with NestJS and Next.js, and part of the system's flowchart design.",
       },
     ],
     liveDemo: "Live demo",
@@ -204,6 +203,26 @@ export const COPY = {
 export const PROJECTS: Record<Lang, Project[]> = {
   pt: [
     {
+      title: "Ecommerce",
+      ref: "PRJ / 02",
+      status: "Em produção",
+      image: "/ecommerce.png",
+      link: "https://ecommerceonprod.netlify.app",
+      tags: ["Java", "Next.js", "Pagamentos"],
+      description:
+        "E-commerce completo com back-end em Java e front-end em Next.js; painéis de admin e usuário controlam vendas, pagamentos e catálogo.",
+    },
+    {
+      title: "Conectando Leitores",
+      ref: "PRJ / 03",
+      status: "Concluído",
+      image: "/ConectandoLeitores.png",
+      link: "https://conectandoleitores.netlify.app",
+      tags: ["Next.js", "Auth", "Favoritos"],
+      description:
+        "Biblioteca online: leitores favoritam, leem e cadastram obras; administradores gerenciam acervo e usuários por um painel próprio.",
+    },
+    {
       title: "Educagil",
       ref: "PRJ / 04",
       status: "Em construção",
@@ -215,6 +234,26 @@ export const PROJECTS: Record<Lang, Project[]> = {
     },
   ],
   en: [
+    {
+      title: "Ecommerce",
+      ref: "PRJ / 02",
+      status: "In production",
+      image: "/ecommerce.png",
+      link: "https://ecommerceonprod.netlify.app",
+      tags: ["Java", "Next.js", "Payments"],
+      description:
+        "Full e-commerce platform with a Java backend and Next.js frontend; admin and user dashboards manage sales, payments and catalog.",
+    },
+    {
+      title: "Conectando Leitores",
+      ref: "PRJ / 03",
+      status: "Completed",
+      image: "/ConectandoLeitores.png",
+      link: "https://conectandoleitores.netlify.app",
+      tags: ["Next.js", "Auth", "Favorites"],
+      description:
+        "Online library: readers favorite, read and submit titles; admins manage the collection and users through a dedicated panel.",
+    },
     {
       title: "Educagil",
       ref: "PRJ / 04",

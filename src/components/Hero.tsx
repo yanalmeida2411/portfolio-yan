@@ -12,7 +12,7 @@ export default function Hero() {
       id="top"
       className="gridlines border-b border-[var(--color-divider)]"
     >
-      <div className="container grid grid-cols-1 items-end gap-14 pt-[88px] lg:grid-cols-[1.35fr_0.65fr]">
+      <div className="container grid grid-cols-1 items-end gap-10 pt-16 sm:gap-14 md:grid-cols-[1.2fr_0.8fr] md:gap-8 md:pt-[88px] lg:grid-cols-[1.35fr_0.65fr] lg:gap-14">
         <div className="rise">
           <div className="mb-[26px] flex items-center gap-[10px]">
             <span className="pulse-dot" />
@@ -71,7 +71,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <div className="h-[88px]" />
+      <div className="h-12 md:h-[88px]" />
     </section>
   );
 }

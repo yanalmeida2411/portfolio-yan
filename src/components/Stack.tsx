@@ -21,7 +21,7 @@ export default function Stack() {
         </div>
 
         {/* grade de 1px: o fundo da grade desenha os filetes entre as células */}
-        <div className="grid grid-cols-1 gap-px bg-[color-mix(in_srgb,var(--color-bg)_18%,transparent)] sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-px bg-[color-mix(in_srgb,var(--color-bg)_18%,transparent)] sm:grid-cols-2 lg:grid-cols-4">
           {t.stack.map((g) => (
             <div
               key={g.name}

@@ -22,15 +22,15 @@ export default function Projects() {
         <article className="blueprint mb-[52px] grid grid-cols-1 lg:grid-cols-[1.15fr_0.85fr]">
           <div className="flex items-center justify-center border-b border-[var(--color-divider)] p-6 lg:border-b-0 lg:border-r">
             <Image
-              src="/ConectandoLeitores.png"
-              alt="Conectando Leitores"
+              src="/smallville.png"
+              alt="Smallville"
               width={900}
               height={560}
               className="h-auto w-full border border-[var(--color-divider)]"
             />
           </div>
 
-          <div className="flex flex-col p-[34px] pb-[30px]">
+          <div className="flex flex-col p-6 pb-6 sm:p-[34px] sm:pb-[30px]">
             <div className="mb-[18px] flex items-center gap-[10px]">
               <span className="bg-[var(--color-accent)] px-[9px] py-1 text-[10px] uppercase tracking-[0.14em] text-[var(--color-bg)]">
                 {t.featured}
@@ -38,10 +38,8 @@ export default function Projects() {
               <span className="label">PRJ / 01</span>
             </div>
 
-            <h3 className="m-0 mb-[14px] font-[family-name:var(--font-heading)] text-[46px] uppercase leading-none">
-              Conectando
-              <br />
-              Leitores
+            <h3 className="m-0 mb-[14px] font-[family-name:var(--font-heading)] text-[clamp(32px,8vw,46px)] uppercase leading-none">
+              Smallville
             </h3>
 
             <p className="m-0 mb-5 text-[15px] leading-[1.6] text-[var(--color-body)] [text-wrap:pretty]">
@@ -92,7 +90,7 @@ export default function Projects() {
         </article>
 
         {/* — grade dos demais projetos — */}
-        <div className="grid grid-cols-1 gap-[26px] sm:grid-cols-2 xl:grid-cols-4">
+        <div className="grid grid-cols-1 gap-[26px] sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {projects.map((p) => (
             <article key={p.title} className="blueprint flex flex-col">
               <div className="border-b border-[var(--color-divider)]">

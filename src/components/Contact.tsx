@@ -4,7 +4,7 @@ import { Corners, useLang } from "./LangProvider";
 import { LINKS } from "@/lib/content";
 
 const ROW =
-  "flex justify-between gap-3 border-b border-[color-mix(in_srgb,var(--color-text)_9%,transparent)] py-[14px] text-[var(--color-text)] hover:text-[var(--color-accent)]";
+  "flex flex-wrap justify-between gap-x-3 gap-y-1 border-b border-[color-mix(in_srgb,var(--color-text)_9%,transparent)] py-[14px] text-[var(--color-text)] hover:text-[var(--color-accent)]";
 
 export default function Contact() {
   const { t } = useLang();
@@ -26,7 +26,7 @@ export default function Contact() {
             <div className="border-t border-[var(--color-divider)]">
               <a href={`mailto:${LINKS.email}`} className={ROW}>
                 <span className="label">{t.labelEmail}</span>
-                <span className="text-[14px]">{LINKS.email}</span>
+                <span className="break-all text-[14px]">{LINKS.email}</span>
               </a>
               <a
                 href={LINKS.linkedin}
