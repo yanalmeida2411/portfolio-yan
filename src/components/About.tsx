@@ -22,8 +22,11 @@ export default function About() {
           <p className="m-0 mb-4 text-[16px] leading-[1.65] text-[var(--color-body)] [text-wrap:pretty]">
             {t.aboutP1}
           </p>
-          <p className="m-0 mb-[26px] text-[16px] leading-[1.65] text-[#5d5d60] [text-wrap:pretty]">
+          <p className="m-0 mb-4 text-[16px] leading-[1.65] text-[var(--color-body)] [text-wrap:pretty]">
             {t.aboutP2}
+          </p>
+          <p className="m-0 mb-[26px] text-[16px] leading-[1.65] text-[var(--color-muted)] [text-wrap:pretty]">
+            {t.aboutP3}
           </p>
           <a
             href={LINKS.linkedin}

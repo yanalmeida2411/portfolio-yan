@@ -7,6 +7,8 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: light;
+
   /* — cores — */
   --color-bg: #f2f2f3;
   --color-surface: #e9e9ea;
@@ -14,9 +16,12 @@
   --color-accent: #5980a6;
   --color-accent-400: #94bce3;
   --color-accent-600: #4c718f;
+  /* usado como cor de texto de ênfase (links, métricas, status):
+     precisa contrastar com --color-bg, então clareia no tema escuro */
   --color-accent-700: #416180;
   --color-divider: color-mix(in srgb, #1d1f20 16%, transparent);
   --color-field: #1d2d3d;        /* campo escuro da seção Stack */
+  --color-field-fg: #f2f2f3;     /* texto sobre o campo escuro */
   --color-muted: #7a7a7d;
   --color-body: #424244;
 
@@ -28,6 +33,47 @@
   --container: 1240px;
   --gutter: 32px;
   --section-y: 84px;
+}
+
+/* — tema escuro —
+   Aplicado por preferência do sistema, a menos que o visitante tenha
+   escolhido "claro" explicitamente (data-theme="light" fixado pelo toggle),
+   e por escolha explícita em data-theme="dark". Os dois blocos repetem os
+   mesmos tokens de propósito: só as cores mudam, nunca a estrutura. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+
+    --color-bg: #121415;
+    --color-surface: #1a1d1f;
+    --color-text: #e8e8ea;
+    --color-accent: #7ba3cc;
+    --color-accent-400: #a9c9e8;
+    --color-accent-600: #93b5da;
+    --color-accent-700: #a9c9e8;
+    --color-divider: color-mix(in srgb, #e8e8ea 18%, transparent);
+    --color-field: #0e1a26;
+    --color-field-fg: #e8e8ea;
+    --color-muted: #8b8d91;
+    --color-body: #b4b6ba;
+  }
+}
+
+:root[data-theme="dark"] {
+  color-scheme: dark;
+
+  --color-bg: #121415;
+  --color-surface: #1a1d1f;
+  --color-text: #e8e8ea;
+  --color-accent: #7ba3cc;
+  --color-accent-400: #a9c9e8;
+  --color-accent-600: #93b5da;
+  --color-accent-700: #a9c9e8;
+  --color-divider: color-mix(in srgb, #e8e8ea 18%, transparent);
+  --color-field: #0e1a26;
+  --color-field-fg: #e8e8ea;
+  --color-muted: #8b8d91;
+  --color-body: #b4b6ba;
 }
 
 * { box-sizing: border-box; }

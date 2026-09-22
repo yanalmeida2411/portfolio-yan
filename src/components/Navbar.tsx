@@ -3,6 +3,7 @@
 import { useState } from "react";
 import Image from "next/image";
 import { Corners, useLang } from "./LangProvider";
+import ThemeToggle from "./ThemeToggle";
 
 const NAV_LINK =
   "font-[family-name:var(--font-heading)] text-[15px] tracking-[0.06em] uppercase text-[var(--color-text)] hover:text-[var(--color-accent)]";
@@ -23,7 +24,7 @@ export default function Navbar() {
       "font-[family-name:var(--font-heading)] text-[12px] tracking-[0.1em] px-[10px] py-[5px] cursor-pointer border-0",
       active
         ? "bg-[var(--color-accent)] text-[var(--color-bg)]"
-        : "bg-transparent text-[#5d5d60] hover:bg-[color-mix(in_srgb,var(--color-text)_7%,transparent)]",
+        : "bg-transparent text-[var(--color-muted)] hover:bg-[color-mix(in_srgb,var(--color-text)_7%,transparent)]",
     ].join(" ");
 
   return (
@@ -34,7 +35,7 @@ export default function Navbar() {
           <span className="truncate font-[family-name:var(--font-heading)] text-[16px] font-semibold tracking-[0.01em] sm:text-[19px]">
             YAN MONTEIRO
           </span>
-          <span className="hidden whitespace-nowrap border-l border-[var(--color-divider)] pl-[10px] text-[10px] uppercase tracking-[0.14em] text-[#597ea3] sm:inline">
+          <span className="hidden whitespace-nowrap border-l border-[var(--color-divider)] pl-[10px] text-[10px] uppercase tracking-[0.14em] text-[var(--color-accent-700)] sm:inline">
             Full Stack
           </span>
         </a>
@@ -47,6 +48,7 @@ export default function Navbar() {
         </nav>
 
         <div className="flex flex-none items-center gap-2 sm:gap-3">
+          <ThemeToggle />
           <div className="flex border border-[var(--color-divider)]">
             <button
               type="button"

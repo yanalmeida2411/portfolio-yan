@@ -16,19 +16,49 @@ const barlowCondensed = Barlow_Condensed({
   display: "swap",
 });
 
+const TITLE = "Yan Monteiro — Desenvolvedor Full Stack";
+const DESCRIPTION =
+  "Portfólio de Yan Monteiro, desenvolvedor full stack. Sete projetos do banco de dados à interface, em Go, Java, NestJS, Next.js e PostgreSQL. Disponível para oportunidades.";
+
 export const metadata: Metadata = {
   metadataBase: new URL("https://yanmonteiro.com.br"),
-  title: "Yan Monteiro — Desenvolvedor Full Stack",
-  description:
-    "Portfólio de Yan Monteiro, desenvolvedor full stack. React, Next.js, Node.js, NestJS, Spring, PostgreSQL. Disponível para oportunidades.",
+  title: TITLE,
+  description: DESCRIPTION,
+  alternates: { canonical: "/" },
+  keywords: [
+    "desenvolvedor full stack",
+    "full stack developer",
+    "Next.js",
+    "React",
+    "Go",
+    "Java",
+    "Spring Boot",
+    "NestJS",
+    "PostgreSQL",
+    "TypeScript",
+  ],
+  authors: [{ name: "Yan Monteiro", url: "https://yanmonteiro.com.br" }],
+  creator: "Yan Monteiro",
   openGraph: {
-    title: "Yan Monteiro — Desenvolvedor Full Stack",
-    description:
-      "Cinco produtos em produção, do banco de dados à interface. React, Next.js, Node.js, PostgreSQL.",
-    images: ["/Perfil.jpg"],
+    title: TITLE,
+    description: DESCRIPTION,
+    url: "/",
+    siteName: "Yan Monteiro",
+    locale: "pt_BR",
+    images: [{ url: "/Perfil.jpg", width: 1200, height: 630, alt: "Yan Monteiro" }],
     type: "website",
   },
+  twitter: {
+    card: "summary_large_image",
+    title: TITLE,
+    description: DESCRIPTION,
+    images: ["/Perfil.jpg"],
+  },
+  robots: { index: true, follow: true },
 };
+
+/** Fixa o tema antes da primeira pintura, para não piscar branco no modo escuro. */
+const THEME_SCRIPT = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
 
 export default function RootLayout({
   children,
@@ -38,7 +68,10 @@ export default function RootLayout({
   return (
     // lang começa em pt-BR (idioma inicial do toggle) e é atualizado no
     // client, em LangProvider, quando o visitante troca para EN.
-    <html lang="pt-BR">
+    <html lang="pt-BR" suppressHydrationWarning>
+      <head>
+        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+      </head>
       {/* as variáveis do next/font sobrescrevem --font-body / --font-heading
           declaradas em globals.css */}
       <body
