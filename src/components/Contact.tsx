@@ -5,7 +5,7 @@ import { ExternalIcon } from "./icons";
 import { LINKS } from "@/lib/content";
 
 const ROW =
-  "flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-[var(--color-divider)] py-4 text-[var(--color-text)] hover:text-[var(--color-accent-700)]";
+  "contact-row flex flex-wrap items-center justify-between gap-x-3 gap-y-1 border-b border-[var(--color-divider)] py-4 text-[var(--color-text)] hover:text-[var(--color-accent-700)]";
 
 export default function Contact() {
   const { t } = useLang();
@@ -69,7 +69,7 @@ export default function Contact() {
               <label htmlFor="mensagem">{t.fMessage}</label>
               <textarea className="input min-h-[160px]" id="mensagem" name="mensagem" required />
             </div>
-            <button type="submit" className="btn btn-primary blueprint">
+            <button type="submit" className="btn btn-primary blueprint" data-magnetic>
               {t.send}
               <Corners />
             </button>

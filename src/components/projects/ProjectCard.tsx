@@ -15,6 +15,12 @@ type Props = {
   onOpen: (slug: Project["slug"]) => void;
 };
 
+/**
+ * Card compacto de galeria. Em repouso mostra só o essencial (print, nome,
+ * categoria, tecnologias, uma linha de posicionamento); a descrição e as
+ * ações sobem num painel sobre o print no hover ou no foco do teclado.
+ * Em toque, o mesmo painel fica fixo embaixo do card — nada depende de hover.
+ */
 export default function ProjectCard({ project, size, onOpen }: Props) {
   const { lang, t } = useLang();
   const ref = useRef<HTMLElement>(null);
@@ -27,8 +33,20 @@ export default function ProjectCard({ project, size, onOpen }: Props) {
   const titleId = `card-${project.slug}`;
 
   return (
-    <article ref={ref} className="depth-card" aria-labelledby={titleId}>
-      <div className="depth-media">
+    <article
+      ref={ref}
+      className="pcard"
+      data-size={size}
+      data-cursor={t.viewCase}
+      aria-labelledby={titleId}
+      // clique em qualquer ponto do card abre o case (atalho de mouse; no
+      // teclado o alvo é o botão do título, logo abaixo)
+      onClick={(e) => {
+        if ((e.target as Element).closest("a, button")) return;
+        onOpen(project.slug);
+      }}
+    >
+      <div className="pcard-media">
         <BrowserFrame url={project.link}>
           <Image
             src={img.src}
@@ -40,11 +58,28 @@ export default function ProjectCard({ project, size, onOpen }: Props) {
             sizes={
               large
                 ? "(max-width: 768px) 100vw, (max-width: 1240px) 50vw, 600px"
-                : "(max-width: 768px) 100vw, (max-width: 1240px) 50vw, 400px"
+                : "(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 400px"
             }
           />
         </BrowserFrame>
-        <ul className="depth-chips m-0 list-none p-0" aria-label={t.stackLabel}>
+        <span className="pcard-status" aria-hidden="true">
+          <i />
+          {project.status}
+        </span>
+      </div>
+
+      <div className="pcard-body">
+        <span className="label">
+          {CATEGORY_LABELS[lang][project.category]} · {project.year}
+          <span className="sr-only">, {project.status}</span>
+        </span>
+        <h3 id={titleId} className="pcard-title">
+          <button type="button" onClick={() => onOpen(project.slug)} aria-haspopup="dialog">
+            {project.title}
+          </button>
+        </h3>
+        <p className="pcard-subtitle">{project.subtitle}</p>
+        <ul className="pcard-tags" aria-label={t.stackLabel}>
           {project.tags.slice(0, large ? 5 : 3).map((tag) => (
             <li key={tag} className="tag">
               {tag}
@@ -53,47 +88,9 @@ export default function ProjectCard({ project, size, onOpen }: Props) {
         </ul>
       </div>
 
-      <div className="depth-body">
-        <div className="mb-3 flex flex-wrap items-center gap-x-4 gap-y-1">
-          <span className="label">{CATEGORY_LABELS[lang][project.category]}</span>
-          <span className="label !text-[var(--color-accent-700)]">{project.status}</span>
-        </div>
-
-        <h3
-          id={titleId}
-          className={`m-0 uppercase leading-[0.98] ${large ? "text-[clamp(32px,4vw,44px)]" : "text-[30px]"}`}
-        >
-          {/* o título também abre o case: alvo maior que só o botão */}
-          <button
-            type="button"
-            onClick={() => onOpen(project.slug)}
-            className="cursor-pointer border-0 bg-transparent p-0 text-left uppercase text-inherit [font:inherit] hover:text-[var(--color-accent-700)]"
-          >
-            {project.title}
-          </button>
-        </h3>
-        <p className="m-0 mt-2 font-[family-name:var(--font-heading)] text-[18px] leading-snug text-[var(--color-muted)]">
-          {project.subtitle}
-        </p>
-
-        <p
-          className={`m-0 mt-4 text-[15px] leading-[1.6] text-[var(--color-body)] [text-wrap:pretty] ${large ? "" : "line-clamp-3"}`}
-        >
-          {large ? project.problem : project.description}
-        </p>
-
-        <dl className="m-0 mt-5 grid grid-cols-3 gap-4 border-t border-[var(--color-divider)] pt-4">
-          {project.metrics.map((m) => (
-            <div key={m.label} className="flex flex-col-reverse gap-1">
-              <dt className="text-[12px] leading-tight text-[var(--color-muted)]">{m.label}</dt>
-              <dd className="m-0 font-[family-name:var(--font-heading)] text-[22px] leading-none text-[var(--color-accent-700)]">
-                {m.value}
-              </dd>
-            </div>
-          ))}
-        </dl>
-
-        <div className="mt-auto flex flex-wrap gap-2 pt-6">
+      <div className="pcard-reveal" data-cursor-off>
+        <p className="pcard-desc">{project.description}</p>
+        <div className="pcard-actions">
           {project.link && (
             <a
               href={project.link}

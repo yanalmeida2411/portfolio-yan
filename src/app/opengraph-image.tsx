@@ -45,7 +45,7 @@ export default function OpengraphImage() {
           </div>
           <div style={{ marginTop: 34, fontSize: 40, color: ACCENT }}>Desenvolvedor Full Stack</div>
           <div style={{ marginTop: 14, fontSize: 28, opacity: 0.75 }}>
-            Do banco de dados à interface. 7 aplicações em produção.
+            Do banco de dados à interface. 8 projetos em produção.
           </div>
         </div>
         <Layers />

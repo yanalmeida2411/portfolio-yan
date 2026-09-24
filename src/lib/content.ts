@@ -2,7 +2,7 @@ import type { ProjectImageKey } from "./images";
 
 export type Lang = "pt" | "en";
 
-export type ProjectCategory = "fullstack" | "frontend";
+export type ProjectCategory = "fullstack" | "frontend" | "website";
 
 export type ProjectSlug =
   | "cineville"
@@ -11,6 +11,7 @@ export type ProjectSlug =
   | "studio"
   | "conectando-leitores"
   | "educagil"
+  | "auraweb"
   | "belle-rose-maison";
 
 export type Metric = {
@@ -63,8 +64,8 @@ export const LINKS = {
 const gh = (repo: string) => `${LINKS.github}/${repo}`;
 
 export const CATEGORY_LABELS: Record<Lang, Record<ProjectCategory, string>> = {
-  pt: { fullstack: "Full stack", frontend: "Front-end" },
-  en: { fullstack: "Full stack", frontend: "Front-end" },
+  pt: { fullstack: "Full stack", frontend: "Front-end", website: "Desenvolvimento web" },
+  en: { fullstack: "Full stack", frontend: "Front-end", website: "Web development" },
 };
 
 export const COPY = {
@@ -83,7 +84,7 @@ export const COPY = {
     location: "Brasil, remoto",
     heroLead: "Construo aplicações web do banco de dados à interface.",
     heroBody:
-      "Interfaces em React e Next.js sobre APIs em Go, Java e NestJS. Sete delas estão no ar agora, com código aberto para você avaliar.",
+      "Interfaces em React e Next.js sobre APIs em Go, Java e NestJS. Oito projetos estão no ar agora, a maioria com código aberto para você avaliar.",
     seeProjects: "Ver projetos",
     contactCta: "Entrar em contato",
     downloadCv: "Currículo no LinkedIn",
@@ -95,7 +96,7 @@ export const COPY = {
 
     projectsTitle: "Projetos em produção",
     projectsLead:
-      "Sete aplicações publicadas. Abra qualquer uma no navegador, ou leia o case para ver o problema, as decisões técnicas e o meu papel.",
+      "Oito projetos publicados. Abra qualquer uma no navegador, ou leia o case para ver o problema, as decisões técnicas e o meu papel.",
     featured: "Destaque",
     visit: "Visitar aplicação",
     caseStudy: "Ler o case",
@@ -111,6 +112,10 @@ export const COPY = {
     codeLabel: "Código",
     privateRepo: "Repositório privado",
     opensNewTab: "(abre em nova aba)",
+    viewCase: "Ver case",
+    scrollHint: "Role para explorar",
+    stackHint: "Passe o mouse sobre uma tecnologia para ver em quais projetos ela está.",
+    stackIn: "Usado em",
 
     stackTitle: "Stack",
     stackLead:
@@ -213,7 +218,7 @@ export const COPY = {
     location: "Brazil, remote",
     heroLead: "I build web applications from the database up to the interface.",
     heroBody:
-      "React and Next.js interfaces on top of Go, Java and NestJS APIs. Seven of them are live right now, with the code open for you to review.",
+      "React and Next.js interfaces on top of Go, Java and NestJS APIs. Eight projects are live right now, most with the code open for you to review.",
     seeProjects: "See the work",
     contactCta: "Get in touch",
     downloadCv: "Résumé on LinkedIn",
@@ -225,7 +230,7 @@ export const COPY = {
 
     projectsTitle: "Live projects",
     projectsLead:
-      "Seven deployed applications. Open any of them in your browser, or read the case study for the problem, the technical decisions and my role.",
+      "Eight deployed projects. Open any of them in your browser, or read the case study for the problem, the technical decisions and my role.",
     featured: "Featured",
     visit: "Visit the app",
     caseStudy: "Read the case study",
@@ -241,6 +246,10 @@ export const COPY = {
     codeLabel: "Code",
     privateRepo: "Private repository",
     opensNewTab: "(opens in a new tab)",
+    viewCase: "View case",
+    scrollHint: "Scroll to explore",
+    stackHint: "Hover a technology to see which projects use it.",
+    stackIn: "Used in",
 
     stackTitle: "Stack",
     stackLead:
@@ -348,6 +357,7 @@ const ALL: ProjectSlug[] = [
   "studio",
   "conectando-leitores",
   "educagil",
+  "auraweb",
   "belle-rose-maison",
 ];
 
@@ -445,6 +455,7 @@ const REPOS: Record<ProjectSlug, RepoLink[]> = {
     { label: "Front-end", url: gh("educagil-front") },
     { label: "API", url: gh("educagil-back") },
   ],
+  auraweb: [],
   "belle-rose-maison": [],
 };
 
@@ -455,6 +466,7 @@ const LIVE: Record<ProjectSlug, string> = {
   studio: "https://learningstudiowithai.netlify.app",
   "conectando-leitores": "https://conectandoleitores.netlify.app",
   educagil: "https://educagil.netlify.app",
+  auraweb: "https://theauraweb.netlify.app",
   "belle-rose-maison": "https://bellerosemaison.netlify.app",
 };
 
@@ -665,6 +677,40 @@ export const PROJECTS: Record<Lang, Project[]> = {
         { value: "2", label: "perfis de acesso" },
         { value: "5", label: "domínios" },
         { value: "Go 1.26", label: "runtime" },
+      ],
+    },
+    {
+      slug: "auraweb",
+      title: "Auraweb",
+      subtitle: "Sites e sistemas sob medida para pequenos negócios",
+      status: "Em produção",
+      year: "2026",
+      category: "website",
+      image: "auraweb",
+      link: LIVE.auraweb,
+      repos: REPOS.auraweb,
+      tags: ["Next.js", "TypeScript", "Tailwind CSS", "UI/UX", "SEO"],
+      description:
+        "Site da Auraweb, que cria sites, landing pages, lojas virtuais e sistemas sob medida para pequenos e médios negócios e profissionais autônomos. A proposta cabe numa linha: fazer cada negócio ser encontrado, lembrado e procurado.",
+      problem:
+        "Pequeno negócio não compra tecnologia, compra ser encontrado. O site precisava explicar cinco serviços sem linguagem técnica e levar a pessoa direto para uma conversa.",
+      features: [
+        "Cinco serviços em painéis: site institucional, landing page, loja virtual, sistema sob medida e manutenção",
+        "Processo em quatro etapas, da primeira conversa ao site no ar",
+        "Contato direto pelo WhatsApp a partir de qualquer seção",
+        "Vitrine de clientes, começando pela Belle Rose Maison",
+        "Layout pensado primeiro para o celular",
+      ],
+      role: "Design de interface e desenvolvimento front-end, do conceito visual à publicação.",
+      highlights: [
+        "Uma metáfora conduz o site inteiro: a aura (halo, espaço, ponto de luz e encontro) vira a identidade visual, o anel 3D do hero e a narrativa da seção “Sobre”.",
+        "Entradas por rolagem com IntersectionObserver e CSS, sem nenhuma biblioteca de animação no bundle.",
+        "Metadados completos para busca e compartilhamento: title, description, Open Graph e Twitter Card com imagem gerada pelo próprio Next.js.",
+      ],
+      metrics: [
+        { value: "5", label: "serviços" },
+        { value: "4", label: "etapas de processo" },
+        { value: "0", label: "libs de animação" },
       ],
     },
     {
@@ -908,6 +954,40 @@ export const PROJECTS: Record<Lang, Project[]> = {
         { value: "2", label: "access profiles" },
         { value: "5", label: "domains" },
         { value: "Go 1.26", label: "runtime" },
+      ],
+    },
+    {
+      slug: "auraweb",
+      title: "Auraweb",
+      subtitle: "Custom websites and systems for small businesses",
+      status: "Live",
+      year: "2026",
+      category: "website",
+      image: "auraweb",
+      link: LIVE.auraweb,
+      repos: REPOS.auraweb,
+      tags: ["Next.js", "TypeScript", "Tailwind CSS", "UI/UX", "SEO"],
+      description:
+        "The website for Auraweb, which builds websites, landing pages, online stores and custom systems for small and mid-sized businesses and independent professionals. The pitch fits in one line: help every business be found, remembered and sought out.",
+      problem:
+        "A small business doesn't buy technology, it buys being found. The site had to explain five services without jargon and take the visitor straight to a conversation.",
+      features: [
+        "Five services in panels: institutional site, landing page, online store, custom system and maintenance",
+        "A four-step process, from the first conversation to the site going live",
+        "Direct WhatsApp contact from any section",
+        "Client showcase, starting with Belle Rose Maison",
+        "Mobile-first layout",
+      ],
+      role: "Interface design and front-end development, from visual concept to launch.",
+      highlights: [
+        "One metaphor drives the whole site: the aura (halo, space, point of light and encounter) becomes the visual identity, the 3D ring in the hero and the story of the “About” section.",
+        "Scroll-in animations built with IntersectionObserver and CSS, with no animation library in the bundle.",
+        "Complete metadata for search and sharing: title, description, Open Graph and Twitter Card with an image generated by Next.js itself.",
+      ],
+      metrics: [
+        { value: "5", label: "services" },
+        { value: "4", label: "process steps" },
+        { value: "0", label: "animation libs" },
       ],
     },
     {

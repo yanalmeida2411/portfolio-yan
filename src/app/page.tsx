@@ -8,6 +8,7 @@ import Process from "@/components/Process";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import { RevealRoot, SkipLink } from "@/components/PageChrome";
+import Interactions from "@/components/Interactions";
 import { LINKS, PROJECTS } from "@/lib/content";
 
 /** Dados estruturados: quem é, o que domina e o que construiu. */
@@ -62,6 +63,7 @@ export default function Home() {
         <Contact />
       </main>
       <Footer />
+      <Interactions />
     </LangProvider>
   );
 }

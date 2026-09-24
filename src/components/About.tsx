@@ -42,7 +42,7 @@ export default function About() {
             </a>
           </div>
 
-          <div className="blueprint order-first max-w-[300px] md:order-none md:max-w-none" data-reveal>
+          <div className="blueprint order-first max-w-[300px] md:order-none md:max-w-none" data-reveal data-parallax="0.05">
             <Image
               src="/Perfil.jpg"
               alt={t.photoAlt}

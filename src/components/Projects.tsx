@@ -16,20 +16,6 @@ function slugFromHash(slugs: readonly ProjectSlug[]): ProjectSlug | null {
   return slugs.find((s) => s === slug) ?? null;
 }
 
-/**
- * Ritmo da grade no desktop (6 colunas): dois destaques lado a lado, três
- * cards menores, e mais dois médios fechando — 3+3 / 2+2+2 / 3+3.
- */
-const SPANS = [
-  "lg:col-span-3",
-  "lg:col-span-3",
-  "lg:col-span-2",
-  "lg:col-span-2",
-  "lg:col-span-2",
-  "lg:col-span-3",
-  "lg:col-span-3",
-];
-
 export default function Projects() {
   const { t, lang } = useLang();
   const projects = PROJECTS[lang];
@@ -96,15 +82,17 @@ export default function Projects() {
           {t.projectsLead}
         </p>
 
-        <ul className="m-0 grid list-none grid-cols-1 gap-x-6 gap-y-10 p-0 md:grid-cols-2 lg:grid-cols-6 lg:gap-x-7 lg:gap-y-14">
+        {/* galeria no desktop (6 colunas): os destaques dividem a primeira
+            linha (3+3) e o resto corre em cards compactos de três por linha */}
+        <ul className="m-0 grid list-none grid-cols-1 gap-6 p-0 md:grid-cols-2 lg:grid-cols-6 lg:gap-7">
           {projects.map((p, n) => (
             <li
               key={p.slug}
-              data-reveal
-              style={{ "--i": n % 3 } as React.CSSProperties}
-              className={`${SPANS[n] ?? "lg:col-span-2"} ${n === 0 ? "md:col-span-2 lg:col-span-3" : ""}`}
+              data-reveal="card"
+              style={{ "--i": p.featured ? n : (n - 2) % 3 } as React.CSSProperties}
+              className={p.featured ? "lg:col-span-3" : "lg:col-span-2"}
             >
-              <ProjectCard project={p} size={n < 2 || n > 4 ? "large" : "small"} onOpen={open} />
+              <ProjectCard project={p} size={p.featured ? "large" : "small"} onOpen={open} />
             </li>
           ))}
         </ul>

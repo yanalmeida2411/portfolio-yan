@@ -178,20 +178,35 @@ a:hover { color: var(--color-accent); }
   border: 1px solid var(--color-divider);
   border-radius: 0;
   padding: 11px 22px;
-  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  transition:
+    background-color 0.2s ease,
+    background-position 0.7s var(--ease-out),
+    color 0.2s ease,
+    border-color 0.2s ease,
+    scale 0.15s ease,
+    translate 0.3s var(--ease-out);
 }
+/* clique: afunda um pouco. translate fica livre para o efeito magnético */
+.btn:active { scale: 0.97; }
 .btn:disabled { opacity: 0.45; cursor: not-allowed; }
 .btn-primary {
-  background: var(--color-accent);
+  background-color: var(--color-accent);
+  /* reflexo que atravessa o botão no hover */
+  background-image: linear-gradient(110deg, transparent 30%, rgb(255 255 255 / 0.22) 50%, transparent 70%);
+  background-size: 250% 100%;
+  background-position: 130% 0;
+  background-repeat: no-repeat;
   color: var(--color-bg);
   border-color: var(--color-accent);
 }
-.btn-primary:hover  { background: var(--color-accent-600); border-color: var(--color-accent-600); color: var(--color-bg); }
-.btn-primary:active { background: var(--color-accent-700); }
+.btn-primary:hover  { background-color: var(--color-accent-600); background-position: -30% 0; border-color: var(--color-accent-600); color: var(--color-bg); }
+.btn-primary:active { background-color: var(--color-accent-700); }
 .btn-secondary:hover  { background: color-mix(in srgb, var(--color-text) 7%, transparent); color: var(--color-text); }
 .btn-secondary:active { background: color-mix(in srgb, var(--color-text) 14%, transparent); }
 .btn-sm { min-height: 40px; padding: 9px 16px; font-size: 14px; }
-.btn .icon { flex: none; }
+.btn .icon { flex: none; transition: transform 0.3s var(--ease-out); }
+/* link que sai do site: a seta aponta para fora */
+.btn[target="_blank"]:hover .icon { transform: translate(2px, -2px); }
 
 /* — tags de tecnologia — */
 .tag {
@@ -350,31 +365,67 @@ textarea.input { resize: vertical; }
 .scene-label span { font-size: 12px; color: var(--color-muted); }
 
 /* ==========================================================================
-   Cards de projeto com profundidade
-   --rx/--ry vêm do ponteiro (só em mouse/trackpad); as camadas internas
-   ficam em Z diferentes, então se deslocam em velocidades diferentes.
+   Cards de projeto — galeria compacta com profundidade
+   --rx/--ry inclinam o card, --mx/--my dizem onde a luz bate e --sx/--sy
+   empurram a sombra para o lado oposto (tudo vem de useTilt, só com mouse).
+   As camadas internas ficam em Z diferentes: print a 28px, selo de status
+   a 52px, painel de detalhes a 32px — por isso se deslocam em velocidades
+   diferentes quando o card inclina.
    ========================================================================== */
-.depth-card {
+.pcard {
   --rx: 0deg;
   --ry: 0deg;
   --lift: 0px;
+  --mx: 50%;
+  --my: 40%;
+  --sx: 0px;
+  --sy: 0px;
   position: relative;
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-areas: "media" "body" "reveal";
+  grid-template-rows: auto 1fr auto;
   height: 100%;
   background: var(--color-raised);
   border: 1px solid var(--color-divider);
+  cursor: pointer;
   transform: perspective(1100px) rotateX(var(--rx)) rotateY(var(--ry)) translateZ(var(--lift));
   transform-style: preserve-3d;
-  transition: transform 0.5s var(--ease-out), border-color 0.2s ease;
+  transition:
+    transform 0.5s var(--ease-out),
+    border-color 0.2s ease,
+    box-shadow 0.5s var(--ease-out);
 }
-.depth-card[data-tilting="true"] { transition: transform 0.12s linear, border-color 0.2s ease; }
-.depth-card:hover,
-.depth-card:focus-within { border-color: color-mix(in srgb, var(--color-accent) 70%, transparent); }
+.pcard[data-tilting="true"] {
+  transition: transform 0.12s linear, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+.pcard:hover,
+.pcard:focus-within { border-color: color-mix(in srgb, var(--color-accent) 70%, transparent); }
+.pcard:hover {
+  box-shadow: var(--sx) var(--sy) 50px -20px color-mix(in srgb, var(--color-accent-600) 55%, transparent);
+}
+/* foco de teclado no título: o anel vai para o card inteiro */
+.pcard:has(.pcard-title button:focus-visible) { outline: 2px solid var(--color-accent); outline-offset: 3px; }
 
-.depth-media {
+/* luz ambiente que acompanha o ponteiro pela superfície do card */
+.pcard::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    480px circle at var(--mx) var(--my),
+    color-mix(in srgb, var(--color-accent) 16%, transparent),
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.pcard:hover::before { opacity: 1; }
+
+.pcard-media {
+  grid-area: media;
   position: relative;
-  padding: 18px 18px 0;
+  padding: 14px 14px 0;
   transform-style: preserve-3d;
 }
 .browser {
@@ -411,28 +462,138 @@ textarea.input { resize: vertical; }
   display: block;
   width: 100%;
   height: auto;
-  aspect-ratio: 16 / 9.5;
+  aspect-ratio: 16 / 10;
   object-fit: cover;
   object-position: top;
   transition: transform 0.8s var(--ease-out);
 }
-.depth-card:hover .browser img { transform: scale(1.035); }
-.depth-chips {
+.pcard[data-size="large"] .browser img { aspect-ratio: 16 / 7.2; }
+.pcard:hover .browser img { transform: scale(1.045); }
+/* reflexo no vidro do print */
+.pcard .browser::after {
+  content: "";
   position: absolute;
-  left: 30px;
-  right: 30px;
-  bottom: -14px;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    380px circle at var(--mx) var(--my),
+    rgb(255 255 255 / 0.13),
+    transparent 55%
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+.pcard:hover .browser::after { opacity: 1; }
+
+.pcard-status {
+  position: absolute;
+  top: 46px;
+  left: 26px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 9px;
+  font-size: 11.5px;
+  line-height: 1.2;
+  color: var(--color-text);
+  background: color-mix(in srgb, var(--color-bg) 86%, transparent);
+  border: 1px solid var(--color-divider);
+  transform: translateZ(52px);
+  pointer-events: none;
+}
+.pcard-status i { width: 6px; height: 6px; background: #3f9c6b; }
+
+.pcard-body {
+  grid-area: body;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 18px 20px 20px;
+}
+.pcard-title {
+  margin: 2px 0 0;
+  font-size: 28px;
+  line-height: 1;
+  text-transform: uppercase;
+}
+.pcard[data-size="large"] .pcard-title { font-size: clamp(30px, 3vw, 38px); }
+.pcard-title button {
+  padding: 0;
+  border: 0;
+  font: inherit;
+  color: inherit;
+  text-align: left;
+  text-transform: inherit;
+  cursor: pointer;
+  /* sublinhado que cresce da esquerda no hover */
+  background: linear-gradient(var(--color-accent), var(--color-accent)) 0 100% / 0 1px no-repeat;
+  transition: color 0.2s ease, background-size 0.45s var(--ease-out);
+}
+.pcard:hover .pcard-title button,
+.pcard-title button:focus-visible {
+  color: var(--color-accent-700);
+  background-size: 100% 1px;
+}
+.pcard-title button:focus-visible { outline: none; }
+.pcard-subtitle {
+  margin: 0;
+  font-family: var(--font-heading);
+  font-size: 17px;
+  line-height: 1.3;
+  color: var(--color-muted);
+  text-wrap: pretty;
+}
+.pcard-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 6px;
-  transform: translateZ(56px);
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
 }
-.depth-body {
-  display: flex;
-  flex: 1;
-  flex-direction: column;
-  padding: 34px 22px 22px;
-  transform: translateZ(0);
+
+/* detalhes: fixos embaixo do card por padrão (toque, teclado sem mouse) */
+.pcard-reveal {
+  grid-area: reveal;
+  padding: 0 20px 20px;
+}
+.pcard-desc {
+  display: -webkit-box;
+  margin: 0 0 14px;
+  overflow: hidden;
+  font-size: 14.5px;
+  line-height: 1.55;
+  color: var(--color-body);
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  text-wrap: pretty;
+}
+.pcard-actions { display: flex; flex-wrap: wrap; gap: 8px; }
+
+/* com mouse: o painel sobe sobre o print, em vidro fosco */
+@media (hover: hover) and (pointer: fine) {
+  .pcard-reveal {
+    grid-area: media;
+    align-self: end;
+    margin: 0 14px;
+    padding: 16px 16px 14px;
+    background: color-mix(in srgb, var(--color-bg) 82%, transparent);
+    backdrop-filter: blur(14px) saturate(1.2);
+    -webkit-backdrop-filter: blur(14px) saturate(1.2);
+    border-top: 1px solid color-mix(in srgb, var(--color-accent) 55%, transparent);
+    opacity: 0;
+    transform: translate3d(0, 16px, 32px);
+    pointer-events: none;
+    transition: opacity 0.35s var(--ease-out), transform 0.45s var(--ease-out);
+  }
+  .pcard[data-size="large"] .pcard-desc { -webkit-line-clamp: 3; }
+  .pcard:hover .pcard-reveal,
+  .pcard:focus-within .pcard-reveal {
+    opacity: 1;
+    transform: translate3d(0, 0, 32px);
+    pointer-events: auto;
+  }
 }
 
 /* ==========================================================================
@@ -557,6 +718,280 @@ textarea.input { resize: vertical; }
 .matrix .mark[data-hot="true"][data-on="true"] { transform: scale(1.25); background: var(--color-field-fg); border-color: var(--color-field-fg); }
 }
 
+/* ==========================================================================
+   Camada de experiência
+   Profundidade, luz e movimento a serviço da leitura — tudo em transform e
+   opacity, e tudo desligado com prefers-reduced-motion (bloco no fim).
+   ========================================================================== */
+
+/* — grade blueprint da página: fixa, então o conteúdo rola por cima dela
+     e a página inteira ganha um plano de fundo contínuo entre as seções — */
+:root { --grid-line: color-mix(in srgb, var(--color-text) 4.5%, transparent); }
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+  background-size: 72px 72px;
+  background-position: center top;
+  -webkit-mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, #000 30%, transparent 100%);
+  mask-image: radial-gradient(ellipse 85% 75% at 50% 40%, #000 30%, transparent 100%);
+}
+
+/* — narrativa: cada seção ganha um número de capítulo, e o fio ao lado do
+     título se desenha quando ela entra na tela — */
+main { counter-reset: chapter; }
+.section-head::before {
+  counter-increment: chapter;
+  content: counter(chapter, decimal-leading-zero);
+  flex: none;
+  padding: 3px 7px;
+  font-family: var(--font-heading);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+  color: var(--color-accent-700);
+  border: 1px solid color-mix(in srgb, var(--color-accent) 45%, transparent);
+}
+.section-field .section-head::before {
+  color: var(--color-accent-400);
+  border-color: color-mix(in srgb, var(--color-accent-400) 40%, transparent);
+}
+[data-motion="on"] .section-head[data-reveal] .rule {
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 1.2s var(--ease-out) 0.25s;
+}
+[data-motion="on"] .section-head[data-reveal].is-visible .rule { transform: none; }
+
+/* — entradas por rolagem: no desktop, do desfocado para o nítido; os cards
+     de projeto chegam ainda inclinados, como se pousassem na mesa — */
+@media (min-width: 768px) {
+  [data-motion="on"] [data-reveal] {
+    filter: blur(6px);
+    transition:
+      opacity 0.8s var(--ease-out),
+      transform 0.8s var(--ease-out),
+      filter 0.8s var(--ease-out);
+    transition-delay: calc(var(--i, 0) * 80ms);
+  }
+  [data-motion="on"] [data-reveal].is-visible { filter: none; }
+}
+[data-motion="on"] [data-reveal="card"] {
+  transform: perspective(1200px) translate3d(0, 44px, 0) rotateX(9deg);
+  transform-origin: 50% 0;
+  transition-duration: 0.95s;
+}
+
+/* — hero — */
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero-grid {
+  position: absolute;
+  inset: -12% 0;
+  background-image:
+    linear-gradient(to right, color-mix(in srgb, var(--color-accent) 16%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in srgb, var(--color-accent) 16%, transparent) 1px, transparent 1px);
+  background-size: 48px 48px;
+  -webkit-mask-image: radial-gradient(ellipse 55% 55% at 72% 48%, #000 0%, transparent 75%);
+  mask-image: radial-gradient(ellipse 55% 55% at 72% 48%, #000 0%, transparent 75%);
+  /* plano de trás: desce mais devagar que a página */
+  transform: translate3d(0, calc(var(--p, 0) * 160px), 0);
+}
+.hero-glow {
+  position: absolute;
+  top: -12%;
+  right: -18%;
+  width: min(1100px, 95vw);
+  aspect-ratio: 1;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--color-accent) 20%, transparent), transparent);
+  transform: translate3d(0, calc(var(--p, 0) * 260px), 0);
+}
+/* o texto sobe e se apaga mais rápido que a cena: sensação de camadas */
+.hero-copy {
+  transform: translate3d(0, calc(var(--p, 0) * -70px), 0) scale(calc(1 - var(--p, 0) * 0.04));
+  transform-origin: left center;
+  opacity: calc(1 - var(--p, 0) * 1.15);
+}
+.hero-visual { transform: translate3d(0, calc(var(--p, 0) * 60px), 0); }
+
+.hero-line { display: block; overflow: hidden; padding-top: 0.06em; margin-top: -0.06em; }
+.hero-line > span { display: block; }
+@keyframes heroLine {
+  from { transform: translate3d(0, 108%, 0); }
+  to   { transform: none; }
+}
+@keyframes heroIn {
+  from { opacity: 0; transform: translate3d(0, 18px, 0); filter: blur(6px); }
+  to   { opacity: 1; transform: none; filter: none; }
+}
+[data-motion="on"] .hero-line > span {
+  animation: heroLine 1s var(--ease-out) both;
+  animation-delay: calc(var(--d, 0) * 90ms + 80ms);
+}
+[data-motion="on"] .hero-in {
+  animation: heroIn 0.9s var(--ease-out) both;
+  animation-delay: calc(var(--d, 0) * 90ms + 80ms);
+}
+
+.scroll-hint {
+  position: absolute;
+  left: 50%;
+  bottom: 18px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  opacity: calc(1 - var(--p, 0) * 5);
+  translate: -50% 0;
+  pointer-events: none;
+}
+.scroll-hint i {
+  width: 1px;
+  height: 38px;
+  background: linear-gradient(var(--color-accent), transparent);
+  transform-origin: top;
+}
+@keyframes hintLine {
+  0%   { transform: scaleY(0); opacity: 1; }
+  55%  { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(1); opacity: 0; }
+}
+[data-motion="on"] .scroll-hint i { animation: hintLine 2.2s var(--ease-out) 1.4s 3 both; }
+@media (min-width: 768px) and (min-height: 720px) {
+  .scroll-hint { display: flex; }
+}
+
+/* — rótulo que segue o ponteiro sobre os projetos (Interactions.tsx) — */
+.cursor-label {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 70;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin: 18px 0 0 16px;
+  padding: 7px 11px;
+  font-family: var(--font-heading);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--color-bg);
+  background: var(--color-accent);
+  pointer-events: none;
+  opacity: 0;
+  scale: 0.6;
+  transition: opacity 0.2s ease, scale 0.3s var(--ease-out);
+  will-change: transform;
+}
+.cursor-label[data-visible="true"] { opacity: 1; scale: 1; }
+
+/* — microinterações de navegação e contato — */
+.nav-link::after {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  bottom: -3px;
+  height: 1px;
+  background: var(--color-accent);
+  transform: scaleX(0);
+  transform-origin: right;
+  transition: transform 0.35s var(--ease-out);
+}
+.nav-link:hover::after { transform: scaleX(1); transform-origin: left; }
+
+.contact-row > * { transition: translate 0.35s var(--ease-out); }
+.contact-row:hover > :first-child { translate: 6px 0; }
+.contact-row .icon { transition: transform 0.3s var(--ease-out); }
+.contact-row:hover .icon { transform: translate(2px, -2px); }
+
+/* — Stack: campo escuro com luz própria e inspetor da matriz — */
+.section-field::before {
+  content: "";
+  position: absolute;
+  inset-inline: 0;
+  top: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent-400), transparent);
+  opacity: 0.55;
+}
+.field-glow {
+  position: absolute;
+  top: -260px;
+  right: -280px;
+  width: 900px;
+  height: 900px;
+  pointer-events: none;
+  background: radial-gradient(closest-side, color-mix(in srgb, var(--color-accent) 20%, transparent), transparent);
+}
+.stack-inspector { display: none; }
+@media (min-width: 1024px) and (hover: hover) {
+  .stack-inspector {
+    display: block;
+    min-height: 200px;
+    padding-top: 18px;
+    font-size: 14px;
+    line-height: 1.55;
+    color: color-mix(in srgb, var(--color-field-fg) 65%, transparent);
+    border-top: 1px solid color-mix(in srgb, var(--color-field-fg) 16%, transparent);
+  }
+}
+.stack-inspector-in {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  animation: inspectIn 0.3s var(--ease-out);
+}
+@keyframes inspectIn {
+  from { opacity: 0; transform: translate3d(0, 6px, 0); }
+  to   { opacity: 1; transform: none; }
+}
+.stack-inspector-kicker {
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--color-accent-400);
+}
+.stack-inspector strong {
+  font-family: var(--font-heading);
+  font-size: 30px;
+  font-weight: 600;
+  line-height: 1.05;
+  text-transform: uppercase;
+  color: var(--color-field-fg);
+}
+.stack-inspector-meta { font-size: 13px; }
+.stack-inspector ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 10px 0 0;
+  padding: 0;
+  list-style: none;
+}
+.stack-inspector li {
+  padding: 3px 8px;
+  font-size: 12px;
+  color: var(--color-field-fg);
+  border: 1px solid color-mix(in srgb, var(--color-accent-400) 45%, transparent);
+}
+
 /* — responsivo — */
 @media (max-width: 1024px) {
   :root { --gutter: 24px; --section-y: 88px; }
@@ -568,23 +1003,33 @@ textarea.input { resize: vertical; }
   :root { --gutter: 16px; --section-y: 68px; --header-h: 58px; }
   .section-head .rule { display: none; }
   .section-lead { margin-bottom: 40px; font-size: 16px; }
-  .depth-body { padding: 30px 18px 18px; }
-  .depth-media { padding: 14px 14px 0; }
-  .depth-chips { left: 24px; right: 24px; }
-  /* uma linha só de tecnologias sobre o print */
-  .depth-chips li:nth-child(n + 4) { display: none; }
+  .pcard-body { padding: 16px 16px 18px; }
+  .pcard-reveal { padding: 0 16px 18px; }
+  .pcard-media { padding: 12px 12px 0; }
+  .pcard-status { top: 42px; left: 22px; }
+  .pcard-title { font-size: 26px; }
+  .pcard-tags li:nth-child(n + 4) { display: none; }
+  .field-glow { display: none; }
 }
 
 /* — sem hover (toque): nada depende de passar o mouse — */
 @media (hover: none) {
-  .depth-card:hover .browser img { transform: none; }
+  .pcard:hover .browser img { transform: none; }
+  .pcard:hover::before,
+  .pcard:hover .browser::after { opacity: 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .pulse-dot { animation: none; }
-  .depth-card, .browser, .browser img { transition: none; }
-  .depth-card:hover .browser img { transform: none; }
+  .pcard, .pcard::before, .browser, .browser img, .browser::after, .pcard-reveal { transition: none; }
+  .pcard:hover .browser img { transform: none; }
+  .btn { transition: background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease; }
+  .btn:active { scale: none; }
+  .btn-primary { background-image: none; }
+  .btn .icon, .contact-row > *, .contact-row .icon, .nav-link::after { transition: none; }
+  .cursor-label { display: none; }
+  .stack-inspector-in { animation: none; }
   .case-dialog[open], .case-dialog::backdrop { animation: none; }
   .hero-scene canvas, .scene-fallback, .scene-label { transition: none; }
 }

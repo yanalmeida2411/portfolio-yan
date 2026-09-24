@@ -61,6 +61,13 @@ export const PROJECT_IMAGES = {
     blurDataURL:
       "data:image/webp;base64,UklGRmYAAABXRUJQVlA4IFoAAADwAQCdASoQAAgAA4BaJbACdAEPdoLNJwgA/uvB78OKN7TzQkHxZH20xor7+l3QBEni0saWT25VTgSK5ILocdRv829/CZr1HGRrMCLBzmhgj4zgdcHAxG1SgAA=",
   },
+  "auraweb": {
+    src: "/projects/auraweb.webp",
+    width: 1600,
+    height: 771,
+    blurDataURL:
+      "data:image/webp;base64,UklGRkYAAABXRUJQVlA4IDoAAADwAQCdASoQAAgAAsBMJQBOgCIe3+dxW8AA/vn8EcERQaWNCnMIbsMjZp2Yz/h+DwDJs/Y9wJpJAAAA",
+  },
 } as const satisfies Record<string, ProjectImage>;
 
 export type ProjectImageKey = keyof typeof PROJECT_IMAGES;

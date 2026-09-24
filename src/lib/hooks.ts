@@ -87,8 +87,10 @@ export function useActiveSection(ids: readonly string[]) {
 const MAX_TILT = 5; // graus — suficiente para sentir profundidade sem enjoar
 
 /**
- * Inclina o elemento seguindo o ponteiro, escrevendo --rx/--ry direto no
- * estilo (sem re-render). Desligado em toque e com movimento reduzido.
+ * Inclina o elemento seguindo o ponteiro, escrevendo variáveis CSS direto no
+ * estilo (sem re-render): --rx/--ry (inclinação), --mx/--my (onde a luz
+ * bate, em %) e --sx/--sy (a sombra foge do ponteiro).
+ * Desligado em toque e com movimento reduzido.
  */
 export function useTilt(ref: RefObject<HTMLElement | null>, enabled: boolean) {
   useEffect(() => {
@@ -108,6 +110,10 @@ export function useTilt(ref: RefObject<HTMLElement | null>, enabled: boolean) {
         el.style.setProperty("--ry", `${(x * MAX_TILT * 2).toFixed(2)}deg`);
         el.style.setProperty("--rx", `${(-y * MAX_TILT * 2).toFixed(2)}deg`);
         el.style.setProperty("--lift", "10px");
+        el.style.setProperty("--mx", `${((x + 0.5) * 100).toFixed(1)}%`);
+        el.style.setProperty("--my", `${((y + 0.5) * 100).toFixed(1)}%`);
+        el.style.setProperty("--sx", `${(-x * 24).toFixed(1)}px`);
+        el.style.setProperty("--sy", `${(18 - y * 12).toFixed(1)}px`);
       });
     };
 
@@ -117,6 +123,8 @@ export function useTilt(ref: RefObject<HTMLElement | null>, enabled: boolean) {
       el.style.setProperty("--rx", "0deg");
       el.style.setProperty("--ry", "0deg");
       el.style.setProperty("--lift", "0px");
+      el.style.setProperty("--sx", "0px");
+      el.style.setProperty("--sy", "0px");
     };
 
     el.addEventListener("pointermove", onMove);
@@ -126,6 +134,43 @@ export function useTilt(ref: RefObject<HTMLElement | null>, enabled: boolean) {
       el.removeEventListener("pointermove", onMove);
       el.removeEventListener("pointerleave", onLeave);
       onLeave();
+    };
+  }, [ref, enabled]);
+}
+
+/**
+ * Progresso de rolagem de uma seção que começa no topo da página:
+ * 0 com ela inteira na tela, 1 quando ela acabou de sair. Escreve em
+ * `--p` no próprio elemento, uma vez por quadro e só enquanto ela está visível.
+ */
+export function useScrollProgress(ref: RefObject<HTMLElement | null>, enabled: boolean) {
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || !enabled) return;
+
+    let frame = 0;
+    let visible = true;
+    const update = () => {
+      frame = 0;
+      const p = Math.min(Math.max(window.scrollY / el.offsetHeight, 0), 1);
+      el.style.setProperty("--p", p.toFixed(4));
+    };
+    const onScroll = () => {
+      if (visible && !frame) frame = requestAnimationFrame(update);
+    };
+    const io = new IntersectionObserver(([entry]) => {
+      visible = entry.isIntersecting;
+      if (visible) onScroll();
+    });
+
+    update();
+    io.observe(el);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => {
+      cancelAnimationFrame(frame);
+      io.disconnect();
+      window.removeEventListener("scroll", onScroll);
+      el.style.removeProperty("--p");
     };
   }, [ref, enabled]);
 }

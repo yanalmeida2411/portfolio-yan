@@ -18,7 +18,7 @@ const barlowCondensed = Barlow_Condensed({
 
 const TITLE = "Yan Monteiro — Desenvolvedor Full Stack";
 const DESCRIPTION =
-  "Portfólio de Yan Monteiro, desenvolvedor full stack. Sete aplicações em produção, do banco de dados à interface, em Go, Java, NestJS, Next.js e PostgreSQL. Disponível para oportunidades.";
+  "Portfólio de Yan Monteiro, desenvolvedor full stack. Oito projetos em produção, do banco de dados à interface, em Go, Java, NestJS, Next.js e PostgreSQL. Disponível para oportunidades.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://yanmonteiro.com.br"),

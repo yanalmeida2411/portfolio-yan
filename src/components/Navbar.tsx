@@ -99,7 +99,7 @@ export default function Navbar() {
                 className={`relative py-1 font-[family-name:var(--font-heading)] text-[16px] tracking-[0.03em] transition-colors ${
                   isActive
                     ? "text-[var(--color-accent-700)] after:absolute after:inset-x-0 after:-bottom-[3px] after:h-px after:bg-[var(--color-accent)]"
-                    : "text-[var(--color-text)] hover:text-[var(--color-accent-700)]"
+                    : "nav-link text-[var(--color-text)] hover:text-[var(--color-accent-700)]"
                 }`}
               >
                 {t[item.key]}
@@ -130,7 +130,7 @@ export default function Navbar() {
               EN
             </button>
           </div>
-          <a href="#contato" className="btn btn-primary btn-sm blueprint hidden lg:inline-flex">
+          <a href="#contato" className="btn btn-primary btn-sm blueprint hidden lg:inline-flex" data-magnetic>
             {t.navCta}
             <Corners />
           </a>
