@@ -4,8 +4,10 @@ import Hero from "@/components/Hero";
 import Projects from "@/components/Projects";
 import Stack from "@/components/Stack";
 import About from "@/components/About";
+import Process from "@/components/Process";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
+import { RevealRoot, SkipLink } from "@/components/PageChrome";
 import { LINKS, PROJECTS } from "@/lib/content";
 
 /** Dados estruturados: quem é, o que domina e o que construiu. */
@@ -37,6 +39,7 @@ const jsonLd = {
     description: p.subtitle,
     applicationCategory: "WebApplication",
     ...(p.link ? { url: p.link } : {}),
+    ...(p.repos[0] ? { codeRepository: p.repos.map((r) => r.url) } : {}),
   })),
 };
 
@@ -47,12 +50,15 @@ export default function Home() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      <SkipLink />
+      <RevealRoot />
       <Navbar />
-      <main>
+      <main id="conteudo" tabIndex={-1} className="outline-none">
         <Hero />
         <Projects />
         <Stack />
         <About />
+        <Process />
         <Contact />
       </main>
       <Footer />

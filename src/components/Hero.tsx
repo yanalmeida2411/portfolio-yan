@@ -1,8 +1,7 @@
 "use client";
 
-import Image from "next/image";
 import { Corners, useLang } from "./LangProvider";
-import { LINKS } from "@/lib/content";
+import HeroScene from "./hero/HeroScene";
 
 export default function Hero() {
   const { t } = useLang();
@@ -10,34 +9,36 @@ export default function Hero() {
   return (
     <section
       id="top"
-      className="gridlines border-b border-[var(--color-divider)]"
+      aria-labelledby="hero-title"
+      className="relative overflow-x-clip border-b border-[var(--color-divider)]"
     >
-      <div className="container grid grid-cols-1 items-end gap-10 pt-16 sm:gap-14 md:grid-cols-[1.2fr_0.8fr] md:gap-8 md:pt-[88px] lg:grid-cols-[1.35fr_0.65fr] lg:gap-14">
-        <div className="rise">
-          <div className="mb-[26px] flex items-center gap-[10px]">
-            <span className="pulse-dot" />
-            <span className="text-[11px] uppercase tracking-[0.16em] text-[var(--color-accent-700)]">
-              {t.available}
-            </span>
-          </div>
+      <div className="container grid min-h-[calc(100svh-var(--header-h))] grid-cols-1 items-center gap-6 pb-14 pt-12 md:grid-cols-[1.05fr_0.95fr] md:gap-4 md:pb-16 md:pt-10">
+        <div className="relative z-10 max-w-[640px]">
+          <p className="m-0 mb-7 flex items-center gap-[10px] text-[14px] text-[var(--color-body)]">
+            <span className="pulse-dot" aria-hidden="true" />
+            {t.available}
+          </p>
 
-          <h1 className="m-0 mb-1 font-[family-name:var(--font-heading)] text-[clamp(64px,9vw,112px)] font-semibold uppercase leading-[0.92] tracking-[-0.02em]">
+          <h1
+            id="hero-title"
+            className="m-0 font-[family-name:var(--font-heading)] text-[clamp(64px,10vw,128px)] font-semibold uppercase leading-[0.88] tracking-[-0.02em]"
+          >
             Yan
             <br />
             Monteiro
           </h1>
 
-          <div className="mt-[22px] flex flex-wrap items-baseline gap-[14px]">
-            <span className="font-[family-name:var(--font-heading)] text-[30px] tracking-[0.01em] text-[var(--color-accent-700)]">
-              {t.role}
-            </span>
-            <span className="h-px min-w-10 flex-1 bg-[var(--color-divider)]" />
-            <span className="text-[11px] uppercase tracking-[0.14em] text-[var(--color-muted)]">
+          <p className="m-0 mt-5 font-[family-name:var(--font-heading)] text-[clamp(24px,3vw,32px)] font-medium leading-tight text-[var(--color-accent-700)]">
+            {t.role}
+            <span className="ml-3 align-middle text-[14px] font-normal text-[var(--color-muted)] [font-family:var(--font-body)]">
               {t.location}
             </span>
-          </div>
+          </p>
 
-          <p className="mt-[30px] max-w-[560px] text-[17px] leading-[1.6] text-[var(--color-body)] [text-wrap:pretty]">
+          <p className="m-0 mt-7 max-w-[34ch] font-[family-name:var(--font-heading)] text-[clamp(22px,2.4vw,27px)] font-medium leading-[1.2]">
+            {t.heroLead}
+          </p>
+          <p className="m-0 mt-3 max-w-[54ch] text-[17px] leading-[1.6] text-[var(--color-body)] [text-wrap:pretty]">
             {t.heroBody}
           </p>
 
@@ -46,32 +47,16 @@ export default function Hero() {
               {t.seeProjects}
               <Corners />
             </a>
-            <a
-              href={LINKS.linkedin}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn btn-secondary"
-            >
-              {t.downloadCv}
+            <a href="#contato" className="btn btn-secondary">
+              {t.contactCta}
             </a>
           </div>
         </div>
 
-        <div className="rise pb-2">
-          <div className="blueprint">
-            <Image
-              src="/Perfil.jpg"
-              alt="Yan Monteiro"
-              width={520}
-              height={650}
-              priority
-              className="block h-auto w-full object-cover [aspect-ratio:4/5] [object-position:center_18%]"
-            />
-            <Corners />
-          </div>
+        <div className="relative -mx-[var(--gutter)] md:mx-0">
+          <HeroScene />
         </div>
       </div>
-      <div className="h-12 md:h-[88px]" />
     </section>
   );
 }

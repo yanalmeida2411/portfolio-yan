@@ -1,9 +1,9 @@
 "use client";
 
 import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
-import { COPY, type Lang } from "@/lib/content";
+import { COPY, type Copy, type Lang } from "@/lib/content";
 
-type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: (typeof COPY)["pt"] };
+type Ctx = { lang: Lang; setLang: (l: Lang) => void; t: Copy };
 
 const LangContext = createContext<Ctx | null>(null);
 
@@ -18,7 +18,7 @@ export function LangProvider({ children }: { children: ReactNode }) {
 
   return (
     <LangContext.Provider
-      value={{ lang, setLang, t: COPY[lang] as (typeof COPY)["pt"] }}
+      value={{ lang, setLang, t: COPY[lang] }}
     >
       {children}
     </LangContext.Provider>

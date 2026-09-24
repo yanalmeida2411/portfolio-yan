@@ -2,31 +2,50 @@ import type { ProjectImageKey } from "./images";
 
 export type Lang = "pt" | "en";
 
-export type ProjectCategory = "fullstack" | "frontend" | "platform";
+export type ProjectCategory = "fullstack" | "frontend";
+
+export type ProjectSlug =
+  | "cineville"
+  | "muquiranas"
+  | "vitrine"
+  | "studio"
+  | "conectando-leitores"
+  | "educagil"
+  | "belle-rose-maison";
 
 export type Metric = {
   value: string;
   label: string;
 };
 
+export type RepoLink = {
+  label: string;
+  url: string;
+};
+
 export type Project = {
-  /** identificador estável — usado em âncoras, filtros e chaves de lista */
-  slug: string;
+  /** identificador estável — usado em âncoras (#projeto-slug) e chaves de lista */
+  slug: ProjectSlug;
   title: string;
   /** posicionamento em uma linha, lido antes da descrição */
   subtitle: string;
-  ref: string;
   status: string;
   year: string;
   category: ProjectCategory;
   image: ProjectImageKey;
-  /** `null` enquanto o deploy não está publicado — a UI esconde o botão */
+  /** deploy em produção; `null` esconde o botão */
   link: string | null;
-  repo: string | null;
+  /** repositórios públicos; vazio quando o código é privado */
+  repos: RepoLink[];
   tags: string[];
   description: string;
+  /** o problema, dito do ponto de vista de quem usa */
+  problem: string;
+  features: string[];
   /** o que eu fiz, não o que o time fez */
   role: string;
+  /** time, empresa ou programa em que o projeto foi feito, quando houver */
+  context?: string;
   /** decisões técnicas defensáveis numa entrevista */
   highlights: string[];
   metrics: Metric[];
@@ -41,79 +60,66 @@ export const LINKS = {
   form: "https://formsubmit.co/yanalmeida2411@gmail.com",
 };
 
-export const CATEGORY_LABELS: Record<Lang, Record<ProjectCategory | "all", string>> = {
-  pt: {
-    all: "Todos",
-    fullstack: "Full stack",
-    platform: "Plataforma",
-    frontend: "Front-end",
-  },
-  en: {
-    all: "All",
-    fullstack: "Full stack",
-    platform: "Platform",
-    frontend: "Front-end",
-  },
+const gh = (repo: string) => `${LINKS.github}/${repo}`;
+
+export const CATEGORY_LABELS: Record<Lang, Record<ProjectCategory, string>> = {
+  pt: { fullstack: "Full stack", frontend: "Front-end" },
+  en: { fullstack: "Full stack", frontend: "Front-end" },
 };
 
 export const COPY = {
   pt: {
+    skipToContent: "Pular para o conteúdo",
     navProjects: "Projetos",
     navStack: "Stack",
     navAbout: "Sobre",
+    navProcess: "Processo",
     navContact: "Contato",
-    navCta: "Contratar",
-    available: "Disponível para oportunidades — CLT ou PJ",
+    navCta: "Fale comigo",
+    menuOpen: "Abrir menu",
+    menuClose: "Fechar menu",
+    available: "Disponível para vagas CLT ou PJ",
     role: "Desenvolvedor Full Stack",
-    location: "Brasil · Remoto",
+    location: "Brasil, remoto",
+    heroLead: "Construo aplicações web do banco de dados à interface.",
     heroBody:
-      "Construo produtos web de ponta a ponta: interfaces em React e Next.js sobre APIs em Go, Java e Node. Foco em performance, acessibilidade e código que outra pessoa consegue manter.",
+      "Interfaces em React e Next.js sobre APIs em Go, Java e NestJS. Sete delas estão no ar agora, com código aberto para você avaliar.",
     seeProjects: "Ver projetos",
+    contactCta: "Entrar em contato",
     downloadCv: "Currículo no LinkedIn",
+    sceneLabel:
+      "Ilustração 3D: três camadas empilhadas — interface, API e dados — ligadas por requisições que sobem e descem entre elas.",
+    layerUi: "Interface",
+    layerApi: "API",
+    layerData: "Dados",
 
-    projectsTitle: "Projetos",
-    projectsCount: "07 projetos",
+    projectsTitle: "Projetos em produção",
     projectsLead:
-      "Sistemas completos, do banco de dados à interface. Cada um com as decisões técnicas que eu defendo.",
+      "Sete aplicações publicadas. Abra qualquer uma no navegador, ou leia o case para ver o problema, as decisões técnicas e o meu papel.",
     featured: "Destaque",
-    filterLabel: "Filtrar por",
+    visit: "Visitar aplicação",
+    caseStudy: "Ler o case",
+    close: "Fechar",
+    prevProject: "Projeto anterior",
+    nextProject: "Próximo projeto",
+    problemLabel: "O problema",
+    featuresLabel: "O que faz",
     roleLabel: "Meu papel",
+    contextLabel: "Contexto",
     decisionsLabel: "Decisões técnicas",
-    liveDemo: "Ver ao vivo",
-    soon: "Em breve",
-    code: "Código",
-    viewProject: "Abrir projeto",
+    stackLabel: "Tecnologias",
+    codeLabel: "Código",
+    privateRepo: "Repositório privado",
+    opensNewTab: "(abre em nova aba)",
 
-    stackTitle: "Stack técnica",
-    stackNote: "Por categoria",
-    stack: [
-      {
-        name: "Frontend",
-        ref: "A",
-        items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "React Native"],
-      },
-      {
-        name: "Backend",
-        ref: "B",
-        items: ["Go", "Java · Spring Boot", "NestJS", "Node.js", "API REST · JWT"],
-      },
-      {
-        name: "Dados",
-        ref: "C",
-        items: ["PostgreSQL", "MongoDB", "MySQL", "Redis", "Prisma · GORM"],
-      },
-      {
-        name: "Infra & Qualidade",
-        ref: "D",
-        items: [
-          "Docker",
-          "Git · GitHub",
-          "CI/CD",
-          "Testes automatizados",
-          "Vercel · Railway · Render",
-        ],
-      },
-    ],
+    stackTitle: "Stack",
+    stackLead:
+      "Só entra aqui o que está em pelo menos um projeto publicado. Cada marca mostra onde a tecnologia foi usada.",
+    stackUsed: "usado",
+    stackTableLabel: "Tabela de tecnologias por projeto",
+    stackNotUsed: "não usado",
+    stackCount: (n: number) => (n === 1 ? "1 projeto" : `${n} projetos`),
+    stackAlso: "Fora desses projetos, usei MySQL, Redux e Python na graduação.",
 
     aboutTitle: "Sobre",
     aboutLead:
@@ -124,6 +130,59 @@ export const COPY = {
       "O que me interessa não é acumular frameworks: é entender por que cada decisão foi tomada. Por isso documento arquitetura antes de codar, cubro o que importa com teste e prefiro uma fronteira explícita a uma abstração esperta.",
     aboutP3:
       "Procuro um time onde eu possa entregar features de ponta a ponta, revisar código com gente mais experiente e evoluir rápido.",
+    photoAlt: "Retrato de Yan Monteiro",
+    trajectoryTitle: "Trajetória",
+    trajectory: [
+      {
+        kind: "Experiência",
+        title: "Desenvolvedor Full Stack, estágio",
+        org: "QA Coders",
+        detail: "API em NestJS e MongoDB e interface em Next.js no Conectando Leitores.",
+      },
+      {
+        kind: "Experiência",
+        title: "Desenvolvedor Full Stack, voluntário",
+        org: "Metis",
+        detail: "Entrei no front-end do Educagil e depois assumi o full stack: API em Go e interface em Next.js.",
+      },
+      {
+        kind: "Formação",
+        title: "Análise e Desenvolvimento de Sistemas",
+        org: "Estácio",
+        detail: "Graduação.",
+      },
+      {
+        kind: "Formação",
+        title: "Inglês, formação completa",
+        org: "CCAA",
+        detail: "Leitura, escrita e conversação.",
+      },
+    ],
+
+    processTitle: "Como eu trabalho",
+    processLead: "O mesmo caminho em todo projeto, com o exemplo de onde ele aparece.",
+    process: [
+      {
+        title: "Desenhar antes de codar",
+        body: "Fluxos, contratos de API e decisões de arquitetura ficam registrados antes da primeira linha.",
+        proof: "Stud.io: 32 ADRs e contratos de API e WebSocket versionados.",
+      },
+      {
+        title: "Fronteiras explícitas",
+        body: "Cada módulo com a mesma estrutura e uma responsabilidade clara, para o próximo ser previsível.",
+        proof: "Cineville: 17 módulos de domínio com a mesma anatomia.",
+      },
+      {
+        title: "Testar o que quebra caro",
+        body: "Teste onde o erro custa dinheiro ou confiança: checkout, caixa, autenticação.",
+        proof: "Muquiranas: 356 testes em Go cobrindo o PDV.",
+      },
+      {
+        title: "Entregar sem passo manual",
+        body: "Docker, migrations embutidas e CI rodando lint, tipos, testes e build a cada push.",
+        proof: "Cineville: deploy automático depois do merge em main.",
+      },
+    ],
 
     contactTitle: "Contato",
     contactBody:
@@ -133,68 +192,64 @@ export const COPY = {
     fMessage: "Mensagem",
     send: "Enviar mensagem",
     rights: "Todos os direitos reservados",
-    builtWith: "Next.js · TypeScript · Tailwind",
+    builtWith: "Feito com Next.js, TypeScript, Tailwind e Three.js",
     labelEmail: "E-mail",
     labelSite: "Site",
     themeToggle: "Alternar tema",
+    langLabel: "Idioma",
   },
   en: {
+    skipToContent: "Skip to content",
     navProjects: "Work",
     navStack: "Stack",
     navAbout: "About",
+    navProcess: "Process",
     navContact: "Contact",
-    navCta: "Hire me",
-    available: "Open to opportunities — full-time or contract",
+    navCta: "Get in touch",
+    menuOpen: "Open menu",
+    menuClose: "Close menu",
+    available: "Open to full-time or contract roles",
     role: "Full Stack Developer",
-    location: "Brazil · Remote",
+    location: "Brazil, remote",
+    heroLead: "I build web applications from the database up to the interface.",
     heroBody:
-      "I build web products end to end: React and Next.js interfaces on top of Go, Java and Node APIs. Focused on performance, accessibility and code someone else can maintain.",
-    seeProjects: "See work",
+      "React and Next.js interfaces on top of Go, Java and NestJS APIs. Seven of them are live right now, with the code open for you to review.",
+    seeProjects: "See the work",
+    contactCta: "Get in touch",
     downloadCv: "Résumé on LinkedIn",
+    sceneLabel:
+      "3D illustration: three stacked layers — interface, API and data — connected by requests travelling up and down between them.",
+    layerUi: "Interface",
+    layerApi: "API",
+    layerData: "Data",
 
-    projectsTitle: "Selected work",
-    projectsCount: "07 projects",
+    projectsTitle: "Live projects",
     projectsLead:
-      "Complete systems, from the database to the interface. Each one with the technical decisions I stand behind.",
+      "Seven deployed applications. Open any of them in your browser, or read the case study for the problem, the technical decisions and my role.",
     featured: "Featured",
-    filterLabel: "Filter by",
+    visit: "Visit the app",
+    caseStudy: "Read the case study",
+    close: "Close",
+    prevProject: "Previous project",
+    nextProject: "Next project",
+    problemLabel: "The problem",
+    featuresLabel: "What it does",
     roleLabel: "My role",
+    contextLabel: "Context",
     decisionsLabel: "Technical decisions",
-    liveDemo: "Live demo",
-    soon: "Coming soon",
-    code: "Code",
-    viewProject: "Open project",
+    stackLabel: "Technologies",
+    codeLabel: "Code",
+    privateRepo: "Private repository",
+    opensNewTab: "(opens in a new tab)",
 
-    stackTitle: "Technical stack",
-    stackNote: "By category",
-    stack: [
-      {
-        name: "Frontend",
-        ref: "A",
-        items: ["React", "Next.js", "TypeScript", "Tailwind CSS", "React Native"],
-      },
-      {
-        name: "Backend",
-        ref: "B",
-        items: ["Go", "Java · Spring Boot", "NestJS", "Node.js", "REST API · JWT"],
-      },
-      {
-        name: "Data",
-        ref: "C",
-        items: ["PostgreSQL", "MongoDB", "MySQL", "Redis", "Prisma · GORM"],
-      },
-      {
-        name: "Infra & Quality",
-        ref: "D",
-        items: [
-          "Docker",
-          "Git · GitHub",
-          "CI/CD",
-          "Automated testing",
-          "Vercel · Railway · Render",
-        ],
-      },
-    ],
+    stackTitle: "Stack",
+    stackLead:
+      "Only what ships in at least one deployed project makes this list. Each mark shows where the technology was used.",
+    stackUsed: "used",
+    stackTableLabel: "Technologies by project table",
+    stackNotUsed: "not used",
+    stackCount: (n: number) => (n === 1 ? "1 project" : `${n} projects`),
+    stackAlso: "Outside these projects, I've used MySQL, Redux and Python during my degree.",
 
     aboutTitle: "About",
     aboutLead:
@@ -205,6 +260,59 @@ export const COPY = {
       "What interests me isn't collecting frameworks — it's understanding why each decision was made. So I document architecture before writing code, test what matters, and prefer an explicit boundary over a clever abstraction.",
     aboutP3:
       "Looking for a team where I can ship features end to end, review code with more experienced engineers and grow fast.",
+    photoAlt: "Portrait of Yan Monteiro",
+    trajectoryTitle: "Background",
+    trajectory: [
+      {
+        kind: "Experience",
+        title: "Full Stack Developer, internship",
+        org: "QA Coders",
+        detail: "NestJS and MongoDB API plus Next.js interface on Conectando Leitores.",
+      },
+      {
+        kind: "Experience",
+        title: "Full Stack Developer, volunteer",
+        org: "Metis",
+        detail: "Joined Educagil on the front end, then took over full stack: Go API and Next.js interface.",
+      },
+      {
+        kind: "Education",
+        title: "Systems Analysis and Development",
+        org: "Estácio",
+        detail: "Associate degree.",
+      },
+      {
+        kind: "Education",
+        title: "English, full program",
+        org: "CCAA",
+        detail: "Reading, writing and conversation.",
+      },
+    ],
+
+    processTitle: "How I work",
+    processLead: "The same path on every project, with an example of where it shows.",
+    process: [
+      {
+        title: "Design before code",
+        body: "Flows, API contracts and architecture decisions are written down before the first line.",
+        proof: "Stud.io: 32 ADRs plus versioned API and WebSocket contracts.",
+      },
+      {
+        title: "Explicit boundaries",
+        body: "Every module shares one structure and one clear job, so the next one is predictable.",
+        proof: "Cineville: 17 domain modules with the same anatomy.",
+      },
+      {
+        title: "Test what breaks expensively",
+        body: "Tests go where a bug costs money or trust: checkout, the register, authentication.",
+        proof: "Muquiranas: 356 Go tests covering the POS.",
+      },
+      {
+        title: "Ship with no manual step",
+        body: "Docker, embedded migrations and CI running lint, types, tests and build on every push.",
+        proof: "Cineville: automatic deploy after merging to main.",
+      },
+    ],
 
     contactTitle: "Contact",
     contactBody:
@@ -214,18 +322,141 @@ export const COPY = {
     fMessage: "Message",
     send: "Send message",
     rights: "All rights reserved",
-    builtWith: "Next.js · TypeScript · Tailwind",
+    builtWith: "Built with Next.js, TypeScript, Tailwind and Three.js",
     labelEmail: "Email",
     labelSite: "Website",
     themeToggle: "Toggle theme",
+    langLabel: "Language",
   },
-} as const;
+};
+
+export type Copy = (typeof COPY)["pt"];
+
+/* ==========================================================================
+   Stack
+   Cada tecnologia aponta para os projetos que a usam — conferido nos
+   package.json / go.mod / build.gradle e nos workflows de CI de cada repositório.
+   ========================================================================== */
+
+export type StackItem = { name: string; usedIn: ProjectSlug[] };
+export type StackGroup = { key: "ui" | "server" | "data" | "delivery"; items: StackItem[] };
+
+const ALL: ProjectSlug[] = [
+  "cineville",
+  "muquiranas",
+  "vitrine",
+  "studio",
+  "conectando-leitores",
+  "educagil",
+  "belle-rose-maison",
+];
+
+export const STACK: StackGroup[] = [
+  {
+    key: "ui",
+    items: [
+      { name: "React", usedIn: ALL },
+      { name: "Next.js", usedIn: ALL },
+      { name: "TypeScript", usedIn: ALL },
+      {
+        name: "Tailwind CSS",
+        usedIn: ALL,
+      },
+      { name: "Zod + React Hook Form", usedIn: ["muquiranas", "vitrine", "studio", "conectando-leitores"] },
+      { name: "Zustand", usedIn: ["muquiranas", "vitrine", "educagil"] },
+    ],
+  },
+  {
+    key: "server",
+    items: [
+      { name: "NestJS (Node.js)", usedIn: ["cineville", "studio", "conectando-leitores"] },
+      { name: "Go", usedIn: ["muquiranas", "educagil"] },
+      { name: "Java + Spring Boot", usedIn: ["vitrine"] },
+      { name: "WebSocket", usedIn: ["studio"] },
+    ],
+  },
+  {
+    key: "data",
+    items: [
+      { name: "PostgreSQL", usedIn: ["muquiranas", "vitrine", "studio", "educagil"] },
+      { name: "MongoDB", usedIn: ["cineville", "conectando-leitores"] },
+      { name: "Redis + BullMQ", usedIn: ["studio"] },
+      { name: "Prisma / GORM", usedIn: ["muquiranas", "studio", "educagil"] },
+    ],
+  },
+  {
+    key: "delivery",
+    items: [
+      {
+        name: "Docker",
+        usedIn: ["cineville", "muquiranas", "studio", "conectando-leitores", "educagil"],
+      },
+      { name: "CI com GitHub Actions", usedIn: ["cineville", "studio", "conectando-leitores"] },
+      {
+        name: "Testes automatizados",
+        usedIn: ["cineville", "muquiranas", "conectando-leitores", "educagil"],
+      },
+    ],
+  },
+];
+
+export const STACK_GROUP_LABELS: Record<Lang, Record<StackGroup["key"], string>> = {
+  pt: { ui: "Interface", server: "Servidor", data: "Dados", delivery: "Entrega" },
+  en: { ui: "Interface", server: "Server", data: "Data", delivery: "Delivery" },
+};
+
+/** Nomes de tecnologia que mudam com o idioma. */
+export const STACK_ITEM_LABELS: Record<Lang, Record<string, string>> = {
+  pt: {},
+  en: {
+    "CI com GitHub Actions": "CI with GitHub Actions",
+    "Testes automatizados": "Automated testing",
+  },
+};
 
 /* ==========================================================================
    Projetos
    Conteúdo extraído da documentação técnica de cada repositório em
-   `ProjetosPublicados/`. `link: null` = deploy ainda não publicado.
+   `ProjetosPublicados/` e das próprias aplicações em produção.
    ========================================================================== */
+
+const REPOS: Record<ProjectSlug, RepoLink[]> = {
+  cineville: [
+    { label: "Front-end", url: gh("smallville-front") },
+    { label: "API", url: gh("smallville-back") },
+  ],
+  muquiranas: [
+    { label: "Front-end", url: gh("muquiranas-front") },
+    { label: "API", url: gh("muquiranas-back") },
+  ],
+  vitrine: [
+    { label: "Front-end", url: gh("ecommerce-front") },
+    { label: "API", url: gh("ecommerce-api") },
+  ],
+  studio: [
+    { label: "Front-end", url: gh("studio-front") },
+    { label: "API", url: gh("studio-back") },
+  ],
+  "conectando-leitores": [
+    { label: "Front-end", url: gh("oraculo") },
+    { label: "API", url: gh("oraculo-back") },
+  ],
+  educagil: [
+    { label: "Front-end", url: gh("educagil-front") },
+    { label: "API", url: gh("educagil-back") },
+  ],
+  "belle-rose-maison": [],
+};
+
+const LIVE: Record<ProjectSlug, string> = {
+  cineville: "https://cineville.netlify.app",
+  muquiranas: "https://muquiranasbar.netlify.app",
+  vitrine: "https://ecommerceonprod.netlify.app",
+  studio: "https://learningstudiowithai.netlify.app",
+  "conectando-leitores": "https://conectandoleitores.netlify.app",
+  educagil: "https://educagil.netlify.app",
+  "belle-rose-maison": "https://bellerosemaison.netlify.app",
+};
 
 export const PROJECTS: Record<Lang, Project[]> = {
   pt: [
@@ -233,17 +464,25 @@ export const PROJECTS: Record<Lang, Project[]> = {
       slug: "cineville",
       title: "Cineville",
       subtitle: "Venda de ingressos de cinema, ponta a ponta",
-      ref: "PRJ / 01",
       status: "Em produção",
       year: "2026",
       category: "fullstack",
       image: "cineville",
-      link: null,
-      repo: null,
+      link: LIVE.cineville,
+      repos: REPOS.cineville,
       featured: true,
-      tags: ["NestJS", "MongoDB", "Next.js 16", "React 19", "JWT"],
+      tags: ["NestJS", "MongoDB", "Next.js 16", "React 19", "JWT", "Docker"],
       description:
         "Não uma tela de listagem de filmes: o fluxo inteiro, do “quero ver esse filme” até o QR Code validado na portaria. Área pública, área do cliente e dashboard administrativo para cinemas, filmes e sessões.",
+      problem:
+        "Vender ingresso online só funciona se a portaria consegue confirmar, na hora, que aquele ingresso é legítimo — e se o cliente consegue comprar filme e bomboniere num único fluxo.",
+      features: [
+        "Filmes em cartaz e lançamentos, com sessões, duração e classificação",
+        "Compra de ingresso com bomboniere integrada e PIX com expiração de 15 minutos",
+        "Ingresso em PDF com QR Code assinado",
+        "Programa de fidelidade com crédito e estorno de pontos",
+        "Dashboard administrativo de cinemas, filmes, sessões e relatórios",
+      ],
       role: "Desenvolvimento full stack (NestJS + Next.js) e desenho do fluxograma do sistema.",
       highlights: [
         "O ingresso se valida sozinho: o QR carrega número + assinatura HMAC-SHA256, então a portaria confere a autenticidade sem depender de consulta ao banco.",
@@ -260,17 +499,25 @@ export const PROJECTS: Record<Lang, Project[]> = {
       slug: "muquiranas",
       title: "Muquiranas",
       subtitle: "PDV e gestão comercial para um bar real",
-      ref: "PRJ / 02",
       status: "Em produção",
       year: "2026",
       category: "fullstack",
       image: "muquiranas",
-      link: null,
-      repo: null,
+      link: LIVE.muquiranas,
+      repos: REPOS.muquiranas,
       featured: true,
       tags: ["Go", "Fiber", "PostgreSQL", "Next.js", "Zustand"],
       description:
         "Sistema de controle interno para um bar em operação: registra vendas, controla estoque e validade, gerencia caixa, comandas, fidelidade, fornecedores, metas e gera relatórios.",
+      problem:
+        "Um bar em operação precisa de vendas, estoque e caixa no mesmo lugar — e o caixa não pode parar quando a internet cai no meio da noite.",
+      features: [
+        "PDV que continua vendendo sem conexão",
+        "Estoque com controle de validade",
+        "Caixa e comandas",
+        "Fidelidade, fornecedores e metas",
+        "Relatórios de vendas",
+      ],
       role: "Desenvolvimento full stack: API em Go e aplicação web em Next.js.",
       highlights: [
         "O PDV continua vendendo sem rede: uma fila offline em Zustand acumula as operações e sincroniza quando a conexão volta — num bar cheio, cair a internet não pode parar o caixa.",
@@ -287,16 +534,24 @@ export const PROJECTS: Record<Lang, Project[]> = {
       slug: "vitrine",
       title: "Vitrine",
       subtitle: "Marketplace multi-loja com checkout transacional",
-      ref: "PRJ / 03",
       status: "Em produção",
       year: "2026",
       category: "fullstack",
       image: "vitrine",
-      link: null,
-      repo: null,
+      link: LIVE.vitrine,
+      repos: REPOS.vitrine,
       tags: ["Java 21", "Spring Boot", "PostgreSQL", "Flyway", "Next.js"],
       description:
         "Marketplace em que várias lojas vendem produtos por categoria. Cobre o ciclo completo da compra: vitrine pública, carrinho com validação de estoque, checkout em etapas, pagamento, acompanhamento do pedido, avaliação e operação administrativa.",
+      problem:
+        "Com várias lojas vendendo no mesmo lugar, o checkout não pode vender o que já acabou nem deixar um pedido pela metade quando algo falha.",
+      features: [
+        "Vitrine pública com lojas e categorias",
+        "Carrinho com validação de estoque",
+        "Checkout em etapas com pagamento simulado",
+        "Acompanhamento de pedido e avaliações",
+        "Painel administrativo",
+      ],
       role: "Desenvolvimento full stack: API REST em Java/Spring Boot e aplicação web em Next.js.",
       highlights: [
         "Checkout transacional: calcula o total, baixa o estoque item a item, congela o preço de compra e cria o pagamento — estoque insuficiente em qualquer item faz rollback da operação inteira.",
@@ -313,16 +568,24 @@ export const PROJECTS: Record<Lang, Project[]> = {
       slug: "studio",
       title: "Stud.io",
       subtitle: "Plataforma de estudos assistidos por IA",
-      ref: "PRJ / 04",
-      status: "Em construção",
+      status: "No ar, em evolução",
       year: "2026",
-      category: "platform",
+      category: "fullstack",
       image: "studio",
-      link: null,
-      repo: null,
-      tags: ["NestJS", "pgvector", "Redis · BullMQ", "Next.js", "Monorepo"],
+      link: LIVE.studio,
+      repos: REPOS.studio,
+      tags: ["NestJS", "pgvector", "Redis + BullMQ", "Next.js", "Monorepo"],
       description:
         "Não “IA que cria questões”: um ambiente de treinamento intelectual com professores de IA reutilizáveis, salas de estudo persistentes, motor de debates com evidências e arena gamificada.",
+      problem:
+        "Estudar com IA só é confiável quando a resposta vem do seu próprio material e diz de onde veio.",
+      features: [
+        "Upload de PDF indexado, com citação de página em cada resposta",
+        "Professores de IA que ensinam a partir do seu material",
+        "Quizzes e flashcards gerados do conteúdo",
+        "Debates avaliados em nove dimensões, com detecção de falácias",
+        "Acompanhamento de domínio por tópico",
+      ],
       role: "Arquitetura e desenvolvimento full stack, do contrato de API à interface.",
       highlights: [
         "RAG próprio: o PDF entra e vira texto, páginas, chunks e embeddings em pgvector — o material fica pesquisável e, mais importante, citável na resposta.",
@@ -339,17 +602,25 @@ export const PROJECTS: Record<Lang, Project[]> = {
       slug: "conectando-leitores",
       title: "Conectando Leitores",
       subtitle: "Biblioteca digital com leitor de EPUB no browser",
-      ref: "PRJ / 05",
-      status: "Concluído",
+      status: "Em produção",
       year: "2026",
       category: "fullstack",
       image: "conectando-leitores",
-      link: "https://conectandoleitores.netlify.app",
-      repo: null,
+      link: LIVE["conectando-leitores"],
+      repos: REPOS["conectando-leitores"],
       tags: ["NestJS", "MongoDB", "Next.js 16", "EPUB", "Firebase"],
       description:
         "Biblioteca online onde leitores favoritam, leem e cadastram obras, e administradores gerenciam acervo e usuários por um painel próprio.",
+      problem:
+        "Leitores querem descobrir e ler um livro no mesmo lugar, sem baixar arquivo; quem mantém o acervo precisa aceitar obras em mais de um formato.",
+      features: [
+        "Leitor de EPUB no navegador, com progresso salvo por usuário",
+        "Ranking semanal e descoberta por categoria",
+        "Favoritos e cadastro de obras em PDF ou EPUB",
+        "Painel administrativo de acervo e usuários",
+      ],
       role: "Desenvolvimento full stack: API em NestJS e aplicação de leitura em Next.js.",
+      context: "Projeto de squad no estágio da QA Coders.",
       highlights: [
         "Leitor de EPUB rodando no próprio browser via epub.js, com o progresso de leitura preservado por usuário.",
         "Pipeline de publicação no backend: extração de texto de PDF e geração de EPUB, para que uma obra entre em qualquer um dos dois formatos.",
@@ -365,17 +636,26 @@ export const PROJECTS: Record<Lang, Project[]> = {
       slug: "educagil",
       title: "Educagil",
       subtitle: "Plataforma de ensino online",
-      ref: "PRJ / 06",
-      status: "Em construção",
+      status: "Em evolução",
       year: "2026",
       category: "fullstack",
       image: "educagil",
-      link: "https://testeducaagil.netlify.app",
-      repo: null,
+      link: LIVE.educagil,
+      repos: REPOS.educagil,
       tags: ["Go", "Gin", "PostgreSQL", "Next.js", "TypeScript"],
       description:
         "Plataforma de ensino com áreas separadas para alunos e professores: cursos, matrículas, progresso, avaliações e certificados, com controle de acesso por papel.",
+      problem:
+        "Aluno e professor olham para o mesmo curso com necessidades diferentes — e cada um só pode ver e fazer o que o seu papel permite.",
+      features: [
+        "Áreas separadas para aluno e professor",
+        "Cursos e matrículas",
+        "Progresso e avaliações",
+        "Emissão de certificados",
+        "Controle de acesso por papel",
+      ],
       role: "API em Go e interface em Next.js, alinhada com as squads “Visão do Professor” e “Visão do Aluno”.",
+      context: "Projeto voluntário na Metis.",
       highlights: [
         "Autenticação JWT HS256 com refresh token rotacionado — a sessão renova sem reexpor as credenciais.",
         "Migrations com goose embutidas no binário e identificadores em UUID v4, o que mantém o deploy reproduzível.",
@@ -391,16 +671,23 @@ export const PROJECTS: Record<Lang, Project[]> = {
       slug: "belle-rose-maison",
       title: "Belle Rose Maison",
       subtitle: "Catálogo de floricultura com pedido por WhatsApp",
-      ref: "PRJ / 07",
-      status: "Concluído",
+      status: "Em produção",
       year: "2026",
       category: "frontend",
       image: "belle-rose",
-      link: null,
-      repo: null,
+      link: LIVE["belle-rose-maison"],
+      repos: REPOS["belle-rose-maison"],
       tags: ["Next.js", "TypeScript", "Tailwind", "SOLID"],
       description:
         "Landing page e catálogo responsivos com favoritos e carrinho, onde o pedido fechado vira uma mensagem pronta no WhatsApp — sem gateway de pagamento e sem fricção para o cliente final.",
+      problem:
+        "Um ateliê de rosas precisava vender online sem a complexidade de um e-commerce: o cliente escolhe o buquê e o pedido chega pronto no WhatsApp.",
+      features: [
+        "Coleção de buquês em três tamanhos, com preço de partida",
+        "Favoritos e carrinho",
+        "Pedido enviado como mensagem pronta no WhatsApp",
+        "Seções de encomendas e experiência de presente",
+      ],
       role: "Desenvolvimento front-end completo, do design recebido à entrega.",
       highlights: [
         "Carrinho e favoritos não falam com o localStorage direto: dependem de uma interface `KeyValueStorage`, então trocar o backend de persistência não toca nos contexts.",
@@ -409,8 +696,8 @@ export const PROJECTS: Record<Lang, Project[]> = {
       ],
       metrics: [
         { value: "100%", label: "responsivo" },
-        { value: "0", label: "dependências de estado" },
-        { value: "SOLID", label: "aplicado a componentes" },
+        { value: "3", label: "tamanhos de buquê" },
+        { value: "0", label: "gateways de pagamento" },
       ],
     },
   ],
@@ -420,17 +707,25 @@ export const PROJECTS: Record<Lang, Project[]> = {
       slug: "cineville",
       title: "Cineville",
       subtitle: "End-to-end cinema ticketing",
-      ref: "PRJ / 01",
-      status: "In production",
+      status: "Live",
       year: "2026",
       category: "fullstack",
       image: "cineville",
-      link: null,
-      repo: null,
+      link: LIVE.cineville,
+      repos: REPOS.cineville,
       featured: true,
-      tags: ["NestJS", "MongoDB", "Next.js 16", "React 19", "JWT"],
+      tags: ["NestJS", "MongoDB", "Next.js 16", "React 19", "JWT", "Docker"],
       description:
         "Not a movie listing screen: the entire flow, from “I want to watch this” to the QR code validated at the door. Public area, customer area and an admin dashboard for cinemas, movies and showtimes.",
+      problem:
+        "Selling tickets online only works if the door staff can confirm on the spot that a ticket is genuine — and if customers can buy the movie and the snacks in one flow.",
+      features: [
+        "Now showing and upcoming releases, with showtimes, runtime and rating",
+        "Ticket purchase with built-in concessions and PIX payments that expire in 15 minutes",
+        "PDF ticket with a signed QR code",
+        "Loyalty program with point credit and reversal",
+        "Admin dashboard for cinemas, movies, showtimes and reports",
+      ],
       role: "Full stack development (NestJS + Next.js) and system flowchart design.",
       highlights: [
         "The ticket validates itself: the QR carries a number plus an HMAC-SHA256 signature, so the door staff can verify authenticity without a database lookup.",
@@ -447,17 +742,25 @@ export const PROJECTS: Record<Lang, Project[]> = {
       slug: "muquiranas",
       title: "Muquiranas",
       subtitle: "POS and management for a real bar",
-      ref: "PRJ / 02",
-      status: "In production",
+      status: "Live",
       year: "2026",
       category: "fullstack",
       image: "muquiranas",
-      link: null,
-      repo: null,
+      link: LIVE.muquiranas,
+      repos: REPOS.muquiranas,
       featured: true,
       tags: ["Go", "Fiber", "PostgreSQL", "Next.js", "Zustand"],
       description:
         "Internal control system for a bar in operation: records sales, tracks stock and expiry, manages the register, tabs, loyalty, suppliers and targets, and generates reports.",
+      problem:
+        "A working bar needs sales, stock and the register in one place — and the register can't stop when the internet drops in the middle of the night.",
+      features: [
+        "POS that keeps selling with no connection",
+        "Stock with expiry tracking",
+        "Register and tabs",
+        "Loyalty, suppliers and targets",
+        "Sales reports",
+      ],
       role: "Full stack development: Go API and Next.js web application.",
       highlights: [
         "The POS keeps selling with no network: an offline queue in Zustand accumulates operations and syncs when the connection returns — in a busy bar, losing internet can't stop the register.",
@@ -474,16 +777,24 @@ export const PROJECTS: Record<Lang, Project[]> = {
       slug: "vitrine",
       title: "Vitrine",
       subtitle: "Multi-store marketplace with transactional checkout",
-      ref: "PRJ / 03",
-      status: "In production",
+      status: "Live",
       year: "2026",
       category: "fullstack",
       image: "vitrine",
-      link: null,
-      repo: null,
+      link: LIVE.vitrine,
+      repos: REPOS.vitrine,
       tags: ["Java 21", "Spring Boot", "PostgreSQL", "Flyway", "Next.js"],
       description:
         "A marketplace where multiple stores sell products by category. It covers the full purchase cycle: public storefront, cart with stock validation, staged checkout, payment, order tracking, reviews and admin operations.",
+      problem:
+        "With many stores selling in one place, checkout can't sell what's already gone or leave an order half-done when something fails.",
+      features: [
+        "Public storefront with stores and categories",
+        "Cart with stock validation",
+        "Staged checkout with simulated payment",
+        "Order tracking and reviews",
+        "Admin panel",
+      ],
       role: "Full stack development: Java/Spring Boot REST API and Next.js web application.",
       highlights: [
         "Transactional checkout: computes the total, decrements stock item by item, freezes the purchase price and creates the payment — insufficient stock on any item rolls the whole operation back.",
@@ -500,16 +811,24 @@ export const PROJECTS: Record<Lang, Project[]> = {
       slug: "studio",
       title: "Stud.io",
       subtitle: "AI-assisted study platform",
-      ref: "PRJ / 04",
-      status: "In progress",
+      status: "Live, evolving",
       year: "2026",
-      category: "platform",
+      category: "fullstack",
       image: "studio",
-      link: null,
-      repo: null,
-      tags: ["NestJS", "pgvector", "Redis · BullMQ", "Next.js", "Monorepo"],
+      link: LIVE.studio,
+      repos: REPOS.studio,
+      tags: ["NestJS", "pgvector", "Redis + BullMQ", "Next.js", "Monorepo"],
       description:
         "Not “AI that writes quiz questions”: an intellectual training environment with reusable AI teachers, persistent study rooms, an evidence-backed debate engine and a gamified arena.",
+      problem:
+        "Studying with AI is only trustworthy when the answer comes from your own material and says where it came from.",
+      features: [
+        "PDF upload indexed so every answer cites its page",
+        "AI teachers that teach from your material",
+        "Quizzes and flashcards generated from the content",
+        "Debates scored on nine dimensions, with fallacy detection",
+        "Mastery tracking per topic",
+      ],
       role: "Architecture and full stack development, from the API contract to the interface.",
       highlights: [
         "A RAG pipeline of its own: a PDF comes in and becomes text, pages, chunks and embeddings in pgvector — the material becomes searchable and, more importantly, citable in the answer.",
@@ -526,17 +845,25 @@ export const PROJECTS: Record<Lang, Project[]> = {
       slug: "conectando-leitores",
       title: "Conectando Leitores",
       subtitle: "Digital library with an in-browser EPUB reader",
-      ref: "PRJ / 05",
-      status: "Completed",
+      status: "Live",
       year: "2026",
       category: "fullstack",
       image: "conectando-leitores",
-      link: "https://conectandoleitores.netlify.app",
-      repo: null,
+      link: LIVE["conectando-leitores"],
+      repos: REPOS["conectando-leitores"],
       tags: ["NestJS", "MongoDB", "Next.js 16", "EPUB", "Firebase"],
       description:
         "An online library where readers favorite, read and submit titles, and admins manage the collection and users through a dedicated panel.",
+      problem:
+        "Readers want to discover and read a book in the same place without downloading files; whoever runs the collection needs to accept titles in more than one format.",
+      features: [
+        "In-browser EPUB reader with progress saved per user",
+        "Weekly ranking and discovery by category",
+        "Favorites and title submission as PDF or EPUB",
+        "Admin panel for the collection and users",
+      ],
       role: "Full stack development: NestJS API and Next.js reading application.",
+      context: "Squad project during my internship at QA Coders.",
       highlights: [
         "An EPUB reader running in the browser via epub.js, with reading progress preserved per user.",
         "A publishing pipeline on the backend: text extraction from PDF and EPUB generation, so a title can arrive in either format.",
@@ -552,17 +879,26 @@ export const PROJECTS: Record<Lang, Project[]> = {
       slug: "educagil",
       title: "Educagil",
       subtitle: "Online teaching platform",
-      ref: "PRJ / 06",
-      status: "In progress",
+      status: "Evolving",
       year: "2026",
       category: "fullstack",
       image: "educagil",
-      link: "https://testeducaagil.netlify.app",
-      repo: null,
+      link: LIVE.educagil,
+      repos: REPOS.educagil,
       tags: ["Go", "Gin", "PostgreSQL", "Next.js", "TypeScript"],
       description:
         "A teaching platform with separate areas for students and teachers: courses, enrollments, progress, assessments and certificates, with role-based access control.",
+      problem:
+        "Students and teachers look at the same course with different needs — and each one can only see and do what their role allows.",
+      features: [
+        "Separate areas for students and teachers",
+        "Courses and enrollments",
+        "Progress and assessments",
+        "Certificates",
+        "Role-based access control",
+      ],
       role: "Go API and Next.js interface, aligned with the “Teacher View” and “Student View” squads.",
+      context: "Volunteer project at Metis.",
       highlights: [
         "JWT HS256 authentication with a rotated refresh token — the session renews without re-exposing credentials.",
         "Migrations with goose embedded in the binary and UUID v4 identifiers, keeping deploys reproducible.",
@@ -578,16 +914,23 @@ export const PROJECTS: Record<Lang, Project[]> = {
       slug: "belle-rose-maison",
       title: "Belle Rose Maison",
       subtitle: "Florist catalog with WhatsApp ordering",
-      ref: "PRJ / 07",
-      status: "Completed",
+      status: "Live",
       year: "2026",
       category: "frontend",
       image: "belle-rose",
-      link: null,
-      repo: null,
+      link: LIVE["belle-rose-maison"],
+      repos: REPOS["belle-rose-maison"],
       tags: ["Next.js", "TypeScript", "Tailwind", "SOLID"],
       description:
         "A responsive landing page and catalog with favorites and a cart, where the finished order becomes a ready-to-send WhatsApp message — no payment gateway, no friction for the end customer.",
+      problem:
+        "A rose atelier needed to sell online without the weight of a full e-commerce: the customer picks a bouquet and the order arrives ready on WhatsApp.",
+      features: [
+        "Bouquet collection in three sizes, with starting prices",
+        "Favorites and cart",
+        "Order sent as a ready-made WhatsApp message",
+        "Ordering and gift-experience sections",
+      ],
       role: "Complete front-end development, from the supplied design to delivery.",
       highlights: [
         "Cart and favorites never talk to localStorage directly: they depend on a `KeyValueStorage` interface, so swapping the persistence backend doesn't touch the contexts.",
@@ -596,8 +939,8 @@ export const PROJECTS: Record<Lang, Project[]> = {
       ],
       metrics: [
         { value: "100%", label: "responsive" },
-        { value: "0", label: "state dependencies" },
-        { value: "SOLID", label: "applied to components" },
+        { value: "3", label: "bouquet sizes" },
+        { value: "0", label: "payment gateways" },
       ],
     },
   ],

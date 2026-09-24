@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Barlow, Barlow_Condensed } from "next/font/google";
 import "./globals.css";
 
@@ -18,7 +18,7 @@ const barlowCondensed = Barlow_Condensed({
 
 const TITLE = "Yan Monteiro — Desenvolvedor Full Stack";
 const DESCRIPTION =
-  "Portfólio de Yan Monteiro, desenvolvedor full stack. Sete projetos do banco de dados à interface, em Go, Java, NestJS, Next.js e PostgreSQL. Disponível para oportunidades.";
+  "Portfólio de Yan Monteiro, desenvolvedor full stack. Sete aplicações em produção, do banco de dados à interface, em Go, Java, NestJS, Next.js e PostgreSQL. Disponível para oportunidades.";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://yanmonteiro.com.br"),
@@ -36,29 +36,42 @@ export const metadata: Metadata = {
     "NestJS",
     "PostgreSQL",
     "TypeScript",
+    "portfólio",
   ],
   authors: [{ name: "Yan Monteiro", url: "https://yanmonteiro.com.br" }],
   creator: "Yan Monteiro",
+  // a imagem de compartilhamento vem de app/opengraph-image.tsx
   openGraph: {
     title: TITLE,
     description: DESCRIPTION,
     url: "/",
     siteName: "Yan Monteiro",
     locale: "pt_BR",
-    images: [{ url: "/Perfil.jpg", width: 1200, height: 630, alt: "Yan Monteiro" }],
+    alternateLocale: ["en_US"],
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
     title: TITLE,
     description: DESCRIPTION,
-    images: ["/Perfil.jpg"],
   },
   robots: { index: true, follow: true },
 };
 
-/** Fixa o tema antes da primeira pintura, para não piscar branco no modo escuro. */
-const THEME_SCRIPT = `try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")document.documentElement.dataset.theme=t}catch(e){}`;
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f2f2f3" },
+    { media: "(prefers-color-scheme: dark)", color: "#121415" },
+  ],
+};
+
+/**
+ * Roda antes da primeira pintura:
+ * - fixa o tema salvo, para não piscar branco no modo escuro;
+ * - liga as entradas animadas (data-motion) só sem prefers-reduced-motion;
+ * - se o JS da página não assumir em 3s, desliga as entradas e mostra tudo.
+ */
+const HEAD_SCRIPT = `(function(){var d=document.documentElement;try{var t=localStorage.getItem("theme");if(t==="light"||t==="dark")d.dataset.theme=t}catch(e){}if(!window.matchMedia("(prefers-reduced-motion: reduce)").matches){d.dataset.motion="on";setTimeout(function(){if(!d.dataset.revealReady)delete d.dataset.motion},3000)}})()`;
 
 export default function RootLayout({
   children,
@@ -70,7 +83,7 @@ export default function RootLayout({
     // client, em LangProvider, quando o visitante troca para EN.
     <html lang="pt-BR" suppressHydrationWarning>
       <head>
-        <script dangerouslySetInnerHTML={{ __html: THEME_SCRIPT }} />
+        <script dangerouslySetInnerHTML={{ __html: HEAD_SCRIPT }} />
       </head>
       {/* as variáveis do next/font sobrescrevem --font-body / --font-heading
           declaradas em globals.css */}
